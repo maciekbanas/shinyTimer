@@ -1,13 +1,14 @@
 devtools::load_all()
 
 ui <- fluidPage(
-  shinyTimer("timer", "Countdown Timer:", 10),
+  shinyTimer("shiny_timer", "Countdown Timer:", 90L, format = "clock", style = "font-weight: bold"),
+  tags$div(style = "margin-top: 5px"),
   actionButton("start", "Start Timer")
 )
 
 server <- function(input, output, session) {
   observeEvent(input$start, {
-    runTimer(input, output, session, "timer", 10)
+    countDown(session, "shiny_timer")
   })
   
   observeEvent(input$timer_done, {

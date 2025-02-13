@@ -1,13 +1,16 @@
 let timerInterval;
 Shiny.addCustomMessageHandler('startCountdown', function(message) {
-  const { startTime, timerId } = message;
+  const { inputId } = message;
   clearInterval(timerInterval);
-  let timeLeft = startTime;
-  const countdownElement = document.getElementById(timerId);
-  countdownElement.textContent = timeLeft;
+  const countdownElement = document.getElementById(inputId);
+  let timeLeft = parseInt(countdownElement.getAttribute('data-start-time'), 10);
+  const format = countdownElement.getAttribute('data-format');
+
+  countdownElement.textContent = formatTime(timeLeft, format);
+  
   timerInterval = setInterval(function() {
     timeLeft--;
-    countdownElement.textContent = timeLeft;
+    countdownElement.textContent = formatTime(timeLeft, format);
 
     if (timeLeft <= 0) {
       clearInterval(timerInterval);
@@ -15,3 +18,13 @@ Shiny.addCustomMessageHandler('startCountdown', function(message) {
     }
   }, 1000);
 });
+
+function formatTime(time, format) {
+  if (format === 'clock') {
+    const minutes = Math.floor(time / 60);
+    const seconds = time % 60;
+    return `${String(minutes).padStart(2, '0')}:${String(seconds).padStart(2, '0')}`;
+  } else {
+    return time;
+  }
+};
