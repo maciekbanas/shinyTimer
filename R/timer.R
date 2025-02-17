@@ -11,14 +11,14 @@
 #' @return A shiny UI component for the countdown timer.
 #' @export
 shinyTimer <- function(inputId, label = NULL, start, format = "simple", ...) {
-  addResourcePath("shinyTimer", system.file("www", package = "shinyTimer"))
+  shiny::addResourcePath("shinyTimer", system.file("www", package = "shinyTimer"))
 
   if (!format %in% c("simple", "clock")) {
     stop("Invalid format. Choose either 'simple' or 'clock'.")
   }
   
   shiny::tagList(
-    if (!is.null(label)) tags$label(label, `for` = inputId),
+    if (!is.null(label)) htmltools::tags$label(label, `for` = inputId),
     htmltools::tags$div(
       id = inputId,
       class = "countdown-timer",
@@ -41,7 +41,6 @@ countDown <- function(session, inputId) {
   session$sendCustomMessage('startCountdown', list(inputId = inputId))
 }
 
-#' Helper
 formatTime <- function(time, format) {
   if (format == "clock") {
     minutes <- floor(time / 60)
