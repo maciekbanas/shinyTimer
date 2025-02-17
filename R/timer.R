@@ -31,6 +31,26 @@ shinyTimer <- function(inputId, label = NULL, start, format = "simple", ...) {
   )
 }
 
+#' Update Countdown Timer
+#'
+#' @param session The session object from the shiny server function.
+#' @param inputId The input ID corresponding to the UI element.
+#' @param start The new starting time for the countdown.
+#' @param format The new format of the countdown timer display (either "simple" or "clock").
+#' @param label The new label to be displayed above the countdown timer.
+#'
+#' @export
+updateShinyTimer <- function(session, inputId, label = NULL, start = NULL, format = NULL) {
+  message <- list(inputId = inputId)
+  
+  if (!is.null(start)) message$start <- start
+  if (!is.null(format)) message$format <- format
+  if (!is.null(label)) message$label <- label
+  
+  session$sendCustomMessage('updateShinyTimer', message)
+}
+
+
 #' Countdown Timer Server Logic
 #'
 #' @param session The session object from the shiny server function.

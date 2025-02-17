@@ -28,3 +28,34 @@ function formatTime(time, format) {
     return time;
   }
 };
+
+Shiny.addCustomMessageHandler('updateShinyTimer', function(message) {
+  const { inputId, start, format, label } = message;
+  const countdownElement = document.getElementById(inputId);
+  const labelElement = document.querySelector(`label[for=${inputId}]`);
+  
+  if (!countdownElement) {
+    console.error(`Element with ID ${inputId} not found.`);
+    return;
+  }
+
+  clearInterval(timerInterval);
+
+  if (startTime !== undefined) {
+    countdownElement.setAttribute('data-start-time', start);
+  }
+
+  if (format !== undefined) {
+    countdownElement.setAttribute('data-format', format);
+  }
+
+  if (label !== undefined && labelElement) {
+    labelElement.textContent = label;
+  }
+  
+  const currentStartTime = parseInt(countdownElement.getAttribute('data-start-time'), 10);
+  const currentFormat = countdownElement.getAttribute('data-format');
+  let timeLeft = currentStartTime;
+
+  countdownElement.textContent = formatTime(timeLeft, currentFormat);
+});
