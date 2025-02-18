@@ -4,18 +4,27 @@
 \alias{updateShinyTimer}
 \title{Update Countdown Timer}
 \usage{
-updateShinyTimer(session, inputId, label = NULL, start = NULL, format = NULL)
+updateShinyTimer(
+  session,
+  inputId,
+  startMinutes = NULL,
+  startSeconds = NULL,
+  format = NULL,
+  label = NULL
+)
 }
 \arguments{
 \item{session}{The session object from the shiny server function.}
 
 \item{inputId}{The input ID corresponding to the UI element.}
 
-\item{label}{The new label to be displayed above the countdown timer.}
+\item{startMinutes}{The new starting time in minutes for the countdown.}
 
-\item{start}{The new starting time for the countdown.}
+\item{startSeconds}{The new starting time in seconds for the countdown.}
 
 \item{format}{The new format of the countdown timer display (either "simple" or "clock").}
+
+\item{label}{The new label to be displayed above the countdown timer.}
 }
 \description{
 Update Countdown Timer

@@ -4,20 +4,27 @@
 \alias{shinyTimer}
 \title{Countdown Timer UI Component}
 \usage{
-shinyTimer(inputId, label = NULL, start, format = "simple", ...)
+shinyTimer(
+  inputId,
+  label = NULL,
+  startMinutes = 0,
+  startSeconds = 0,
+  format = "simple",
+  ...
+)
 }
 \arguments{
 \item{inputId}{The input id.}
 
 \item{label}{The label to display above the countdown.}
 
-\item{start}{An integer, the starting time in \code{secs} for the countdown.}
+\item{startMinutes}{An integer, the starting time in minutes for the countdown.}
 
-\item{format}{The format of the countdown timer display (either "simple" or
-"clock").}
+\item{startSeconds}{An integer, the starting time in seconds for the countdown.}
 
-\item{...}{Any additional parameters you want to pass to the placeholder for
-the timer (\code{htmltools::tags$div()}).}
+\item{format}{The format of the countdown timer display (either "simple" or "clock").}
+
+\item{...}{Any additional parameters you want to pass to the placeholder for the timer (\code{htmltools::tags$div}).}
 }
 \value{
 A shiny UI component for the countdown timer.
