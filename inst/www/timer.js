@@ -38,10 +38,10 @@ Shiny.addCustomMessageHandler('updateShinyTimer', function(message) {
     console.error(`Element with ID ${inputId} not found.`);
     return;
   }
-
+  
   clearInterval(timerInterval);
 
-  if (startTime !== undefined) {
+  if (start !== undefined) {
     countdownElement.setAttribute('data-start-time', start);
   }
 
