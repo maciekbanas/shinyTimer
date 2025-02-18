@@ -7,6 +7,7 @@ ui <- fluidPage(
       label = "Countdown Timer:", 
       start = 30L, 
       format = "simple", 
+      animate = "roll-down",
       style = "font-weight: bold; font-size: 72px"
     )
   )

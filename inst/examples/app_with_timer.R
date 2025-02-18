@@ -3,6 +3,7 @@ devtools::load_all()
 ui <- fluidPage(
   shinyTimer("shiny_timer", "Countdown Timer:", 10L, 
              format = "clock", 
+             animate = "flip",
              style = "font-weight: bold; font-size: 72px"),
   tags$div(style = "margin-top: 5px"),
   actionButton("start", "Start Timer")

@@ -1,0 +1,58 @@
+.countdown-timer {
+  display: inline-block;
+  font-size: 2em;
+  line-height: 1em;
+  overflow: hidden;
+}
+
+.countdown-timer.roll-down .digit {
+  transition: transform 0.5s ease-in-out;
+}
+
+.roll-down .digit.roll {
+  transform: translateY(100%);
+}
+
+.countdown-timer.fade .digit {
+  opacity: 1;
+  transition: opacity 0.5s ease-in-out;
+}
+
+.fade .digit.fade-out {
+  opacity: 0;
+}
+
+.countdown-timer.slide .digit {
+  transition: transform 0.5s ease-in-out;
+  display: inline-block;
+}
+
+.slide .digit.slide-out-left {
+  transform: translateX(-100%);
+}
+
+.slide .digit.slide-in-right {
+  transform: translateX(100%);
+}
+
+.countdown-timer.flip .digit {
+  transition: transform 0.5s ease-in-out;
+  display: inline-block;
+}
+
+.flip .digit.flip {
+  transform: rotateX(180deg);
+}
+
+.countdown-timer.bounce .digit {
+  animation: bounce 0.5s ease infinite;
+}
+
+@keyframes bounce {
+  0%, 100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-20px);
+  }
+}

@@ -5,12 +5,47 @@ Shiny.addCustomMessageHandler('startCountdown', function(message) {
   const countdownElement = document.getElementById(inputId);
   let timeLeft = parseInt(countdownElement.getAttribute('data-start-time'), 10);
   const format = countdownElement.getAttribute('data-format');
-
+  const animate = countdownElement.getAttribute('data-animate');
+  debugger;
+  const updateDisplay = () => {
+    const newContent = formatTime(timeLeft, format);
+    if (animate === 'roll-down') {
+      countdownElement.classList.remove('roll');
+      void countdownElement.offsetWidth;
+      countdownElement.classList.add('roll');
+    } else if (animate === 'fade') {
+      countdownElement.classList.add('fade-out');
+      setTimeout(() => {
+        countdownElement.textContent = newContent;
+        countdownElement.classList.remove('fade-out');
+      }, 500);
+    } else if (animate === 'slide') {
+      countdownElement.classList.add('slide-out-left');
+      setTimeout(() => {
+        countdownElement.classList.remove('slide-out-left');
+        countdownElement.classList.add('slide-in-right');
+        countdownElement.textContent = newContent;
+        setTimeout(() => { countdownElement.classList.remove('slide-in-right'); }, 500);
+      }, 500);
+    } else if (animate === 'flip') {
+      countdownElement.classList.add('flip');
+      setTimeout(() => { countdownElement.classList.remove('flip'); }, 500);
+    } else if (animate === 'bounce') {
+      countdownElement.classList.add('bounce');
+    } else {
+      countdownElement.textContent = newContent;
+    }
+  };
+  
   countdownElement.textContent = formatTime(timeLeft, format);
+  
+  if (animate) {
+    countdownElement.classList.add(animate);
+  }
   
   timerInterval = setInterval(function() {
     timeLeft--;
-    countdownElement.textContent = formatTime(timeLeft, format);
+    updateDisplay();
 
     if (timeLeft <= 0) {
       clearInterval(timerInterval);
@@ -47,6 +82,10 @@ Shiny.addCustomMessageHandler('updateShinyTimer', function(message) {
 
   if (format !== undefined) {
     countdownElement.setAttribute('data-format', format);
+  }
+
+  if (animate !== undefined) {
+    countdownElement.setAttribute('data-animate', animate);
   }
 
   if (label !== undefined && labelElement) {
