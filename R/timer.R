@@ -69,14 +69,34 @@ updateShinyTimer <- function(session, inputId, minutes = NULL, seconds = NULL, f
   session$sendCustomMessage('updateShinyTimer', message)
 }
 
-#' Set `shinyTimer` in motion
+#' Set `shinyTimer` in motion: count down
 #'
 #' @param session The session object from the shiny server function.
 #' @param inputId The input ID corresponding to the UI element.
 #'
 #' @export
 countDown <- function(session, inputId) {
-  session$sendCustomMessage('startCountdown', list(inputId = inputId))
+  session$sendCustomMessage('countDown', list(inputId = inputId))
+}
+
+#' Set `shinyTimer` in motion: count up
+#'
+#' @param session The session object from the shiny server function.
+#' @param inputId The input ID corresponding to the UI element.
+#'
+#' @export
+countUp <- function(session, inputId) {
+  session$sendCustomMessage('countUp', list(inputId = inputId))
+}
+
+#' Stop `shinyTimer`
+#'
+#' @param session The session object from the shiny server function.
+#' @param inputId The input ID corresponding to the UI element.
+#'
+#' @export
+stopTimer <- function(session, inputId) {
+  session$sendCustomMessage('stopTimer', list(inputId = inputId))
 }
 
 formatTime <- function(time, format) {
