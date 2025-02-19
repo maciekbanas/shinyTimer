@@ -25,7 +25,7 @@ In examples below I make use of
 
 Development version:
 
-    install.packages("remotes")
+    # install.packages("remotes")
     remotes::install_github("maciekbanas/shinyTimer")
 
 ## How it works
@@ -41,6 +41,14 @@ switch `format` to a `clock`.
 <div style="text-align: center;">
 
 <img src="inst/gifs/shiny_timer_update.gif" alt=""/>
+
+</div>
+
+You can either set only `seconds`, `minutes` or both.
+
+<div style="text-align: center;">
+
+<img src="inst/gifs/shiny_timer_set_minutes.gif" alt=""/>
 
 </div>
 

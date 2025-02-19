@@ -30,7 +30,7 @@ knitr::opts_chunk$set(
 Development version:
 
 ```
-install.packages("remotes")
+# install.packages("remotes")
 remotes::install_github("maciekbanas/shinyTimer")
 ```
 
@@ -45,6 +45,12 @@ To get things work you need two functions:
 
 <div style="text-align: center;">
   <img src="inst/gifs/shiny_timer_update.gif" alt=""/>
+</div>
+
+You can either set only `seconds`, `minutes` or both.
+
+<div style="text-align: center;">
+  <img src="inst/gifs/shiny_timer_set_minutes.gif" alt=""/>
 </div>
 
 ## When timer completes
