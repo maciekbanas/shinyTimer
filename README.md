@@ -12,6 +12,15 @@
 UI, providing real-time updates and server notification when the timer
 completes.
 
+In examples below I make use of
+[shinyMobile](https://github.com/RinteRface/shinyMobile/) framework.
+
+<div style="text-align: center;">
+
+<img src="inst/gifs/shiny_timer.gif" alt=""/>
+
+</div>
+
 ## Install
 
 Development version:
@@ -26,14 +35,19 @@ To get things work you need two functions:
 - On `UI` side `shinyTimer()` to add a widget.
 - On `server` side `countDown()` to trigger counting.
 
+`shinyTimer()` is by default formatted as `simple` one, but you can
+switch `format` to a `clock`.
+
+<div style="text-align: center;">
+
+<img src="inst/gifs/shiny_timer_update.gif" alt=""/>
+
+</div>
+
+## When timer completes
+
 Once the timer reaches `0` JavaScript sends `timer_done` value to Shiny
 `input`. You can use it to trigger an action (see example below).
-
-## Example with `shinyMobile`
-
-![](inst/gifs/shiny_timer.gif)
-
-Code:
 
     ui <- shinyMobile::f7Page(
       shinyMobile::f7Card(
@@ -70,3 +84,9 @@ Code:
     }
 
     shinyApp(ui, server)
+
+<div style="text-align: center;">
+
+<img src="inst/gifs/shiny_timer_done.gif" alt=""/>
+
+</div>

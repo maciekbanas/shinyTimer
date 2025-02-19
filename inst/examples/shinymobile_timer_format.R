@@ -8,16 +8,11 @@ ui <- shinyMobile::f7Page(
       format = "simple", 
       style = "font-weight: bold; font-size: 72px; text-align:center"
     ),
-    shinyMobile::f7Button(
-      "start_timer",
-      label = "Start", 
-      size = "large",
-      rounded = TRUE,
-      color = "orange"
-    ) |>
-      htmltools::tagAppendAttributes(
-        style="font-size:20px;"
-      )
+    shinyMobile::f7Select(
+      inputId = "timer_format",
+      label = NULL,
+      choices = c("simple", "clock")
+    )
   )
 )
 
@@ -25,11 +20,11 @@ server <- function(input, output, session) {
   shiny::observeEvent(input$start_timer, {
     countDown(session, "shiny_timer")
   })
-  shiny::observeEvent(input$timer_done, {
-    shinyMobile::f7Dialog(
-      id = "dialog",
-      title = "Time's Up!",
-      text = ""
+  shiny::observeEvent(input$timer_format, {
+    updateShinyTimer(
+      session = session,
+      inputId = "shiny_timer",
+      format = input$timer_format
     )
   })
 }
