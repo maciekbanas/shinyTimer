@@ -2,7 +2,7 @@
 % Please edit documentation in R/timer.R
 \name{updateShinyTimer}
 \alias{updateShinyTimer}
-\title{Update Countdown Timer}
+\title{Update \code{shinyTimer} widget}
 \usage{
 updateShinyTimer(
   session,
@@ -27,5 +27,5 @@ updateShinyTimer(
 \item{label}{The new label to be displayed above the countdown timer.}
 }
 \description{
-Update Countdown Timer
+Update \code{shinyTimer} widget
 }

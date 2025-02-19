@@ -1,4 +1,4 @@
-#' Countdown Timer UI Component
+#' `shinyTimer` widget
 #'
 #' @param inputId The input id.
 #' @param label The label to display above the countdown.
@@ -42,7 +42,7 @@ shinyTimer <- function(inputId, label = NULL, minutes = 0, seconds = 0, format =
   )
 }
 
-#' Update Countdown Timer
+#' Update `shinyTimer` widget
 #'
 #' @param session The session object from the shiny server function.
 #' @param inputId The input ID corresponding to the UI element.
@@ -69,7 +69,7 @@ updateShinyTimer <- function(session, inputId, minutes = NULL, seconds = NULL, f
   session$sendCustomMessage('updateShinyTimer', message)
 }
 
-#' Countdown Timer Server Logic
+#' Set `shinyTimer` in motion
 #'
 #' @param session The session object from the shiny server function.
 #' @param inputId The input ID corresponding to the UI element.
