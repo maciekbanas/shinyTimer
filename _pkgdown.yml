@@ -14,3 +14,5 @@ reference:
 - title: Actions (server)
   contents:
   - '`countDown`'
+  - '`countUp`'
+  - '`stopTimer`'
