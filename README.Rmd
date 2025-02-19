@@ -11,7 +11,7 @@ knitr::opts_chunk$set(
 )
 ```
 
-# shinyTimer
+# shinyTimer <img src="man/figures/shinyTimer.png" align="right" height="138" style="float:right; height:138px;" alt = "shinyTimer Logo"/>
 
 <!-- badges: start -->
 [![R-CMD-check](https://github.com/maciekbanas/shinyTimer/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/maciekbanas/shinyTimer/actions/workflows/R-CMD-check.yaml)

@@ -1,6 +1,6 @@
 Package: shinyTimer
 Title: Countdown Timer for Shiny
-Version: 0.0.0.9008
+Version: 0.0.0.9010
 Authors@R: 
     person("Maciej", "Banas", email = "banasmaciek@gmail.com", role = c("aut", "cre"))
 Description: Provides a customizable countdown timer widget for Shiny applications.
