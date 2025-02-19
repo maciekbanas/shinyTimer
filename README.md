@@ -1,7 +1,7 @@
 
 <!-- README.md is generated from README.Rmd. Please edit that file -->
 
-# shinyTimer
+# shinyTimer <img src="man/figures/shinyTimer.png" align="right" height="138" style="float:right; height:138px;" alt = "shinyTimer Logo"/>
 
 <!-- badges: start -->
 
