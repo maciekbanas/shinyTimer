@@ -40,8 +40,8 @@ server <- function(input, output, session) {
     updateShinyTimer(
       session = session,
       inputId = "shiny_timer",
-      startSeconds = input$seconds_slider,
-      startMinutes = input$minutes_slider
+      seconds = input$seconds_slider,
+      minutes = input$minutes_slider
     )
   })
   shiny::observeEvent(input$start_timer, {
