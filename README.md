@@ -61,7 +61,7 @@ Once the timer reaches `0` JavaScript sends `timer_done` value to Shiny
       shinyMobile::f7Card(
         shinyTimer(
           inputId = "shiny_timer",
-          startSeconds = 10L, 
+          seconds = 10L, 
           format = "simple", 
           style = "font-weight: bold; font-size: 72px; text-align:center"
         ),

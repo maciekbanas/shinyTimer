@@ -7,8 +7,8 @@
 shinyTimer(
   inputId,
   label = NULL,
-  startMinutes = 0,
-  startSeconds = 0,
+  minutes = 0,
+  seconds = 0,
   format = "simple",
   ...
 )
@@ -18,9 +18,9 @@ shinyTimer(
 
 \item{label}{The label to display above the countdown.}
 
-\item{startMinutes}{An integer, the starting time in minutes for the countdown.}
+\item{minutes}{An integer, the starting time in minutes for the countdown.}
 
-\item{startSeconds}{An integer, the starting time in seconds for the countdown.}
+\item{seconds}{An integer, the starting time in seconds for the countdown.}
 
 \item{format}{The format of the countdown timer display (either "simple" or "clock").}
 
