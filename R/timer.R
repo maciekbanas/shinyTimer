@@ -32,7 +32,7 @@ shinyTimer <- function(inputId, label = NULL, minutes = 0, seconds = 0, format =
     if (!is.null(label)) htmltools::tags$label(label, `for` = inputId),
     htmltools::tags$div(
       id = inputId,
-      class = "countdown-timer",
+      class = "shiny-timer",
       `data-start-time` = totalseconds,
       `data-format` = format,
       formatTime(totalseconds, format),
