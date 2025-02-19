@@ -17,7 +17,7 @@ In examples below I make use of
 
 <div style="text-align: center;">
 
-<img src="inst/gifs/shiny_timer.gif" alt=""/>
+<img src="man/figures/shiny_timer.gif" alt=""/>
 
 </div>
 
@@ -40,7 +40,7 @@ switch `format` to a `clock`.
 
 <div style="text-align: center;">
 
-<img src="inst/gifs/shiny_timer_update.gif" alt=""/>
+<img src="man/figures/shiny_timer_update.gif" alt=""/>
 
 </div>
 
@@ -48,7 +48,7 @@ You can either set only `seconds`, `minutes` or both.
 
 <div style="text-align: center;">
 
-<img src="inst/gifs/shiny_timer_set_minutes.gif" alt=""/>
+<img src="man/figures/shiny_timer_set_minutes.gif" alt=""/>
 
 </div>
 
@@ -95,6 +95,6 @@ Once the timer reaches `0` JavaScript sends `timer_done` value to Shiny
 
 <div style="text-align: center;">
 
-<img src="inst/gifs/shiny_timer_done.gif" alt=""/>
+<img src="man/figuress/shiny_timer_done.gif" alt=""/>
 
 </div>

@@ -2,7 +2,7 @@
 % Please edit documentation in R/timer.R
 \name{countDown}
 \alias{countDown}
-\title{Countdown Timer Server Logic}
+\title{Set \code{shinyTimer} in motion}
 \usage{
 countDown(session, inputId)
 }
@@ -12,5 +12,5 @@ countDown(session, inputId)
 \item{inputId}{The input ID corresponding to the UI element.}
 }
 \description{
-Countdown Timer Server Logic
+Set \code{shinyTimer} in motion
 }
