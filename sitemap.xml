@@ -5,8 +5,10 @@
 <url><loc>/authors.html</loc></url>
 <url><loc>/index.html</loc></url>
 <url><loc>/reference/countDown.html</loc></url>
+<url><loc>/reference/countUp.html</loc></url>
 <url><loc>/reference/index.html</loc></url>
 <url><loc>/reference/shinyTimer.html</loc></url>
+<url><loc>/reference/stopTimer.html</loc></url>
 <url><loc>/reference/updateShinyTimer.html</loc></url>
 </urlset>
 

@@ -22,7 +22,7 @@
 
     <a class="navbar-brand me-2" href="index.html">shinyTimer</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.0.0.9008</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.0.0.9009</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -64,11 +64,7 @@
 <div class="section level2">
 <h2 id="how-it-works">How it works<a class="anchor" aria-label="anchor" href="#how-it-works"></a>
 </h2>
-<p>To get things work you need two functions:</p>
-<ul>
-<li>On <code>UI</code> side <code><a href="reference/shinyTimer.html">shinyTimer()</a></code> to add a widget.</li>
-<li>On <code>server</code> side <code><a href="reference/countDown.html">countDown()</a></code> to trigger counting.</li>
-</ul>
+<p>To get things work you need to add in your <code>UI</code> <code><a href="reference/shinyTimer.html">shinyTimer()</a></code> and trigger an action in your <code>server</code> (e.g. <code><a href="reference/countDown.html">countDown()</a></code>).</p>
 <p><code><a href="reference/shinyTimer.html">shinyTimer()</a></code> is by default formatted as <code>simple</code> one, but you can switch <code>format</code> to a <code>clock</code>.</p>
 <div style="text-align: center;">
 <p><img src="reference/figures/shiny_timer_update.gif" alt=""></p>
@@ -82,6 +78,9 @@
 <h2 id="when-timer-completes">When timer completes<a class="anchor" aria-label="anchor" href="#when-timer-completes"></a>
 </h2>
 <p>Once the timer reaches <code>0</code> JavaScript sends <code>timer_done</code> value to Shiny <code>input</code>. You can use it to trigger an action (see example below).</p>
+<div style="text-align: center;">
+<p><img src="reference/figures/shiny_timer_done.gif" alt=""></p>
+</div>
 <div class="sourceCode" id="cb2"><pre class="sourceCode R"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" tabindex="-1"></a>ui <span class="ot">&lt;-</span> shinyMobile<span class="sc">::</span><span class="fu">f7Page</span>(</span>
 <span id="cb2-2"><a href="#cb2-2" tabindex="-1"></a>  shinyMobile<span class="sc">::</span><span class="fu">f7Card</span>(</span>
 <span id="cb2-3"><a href="#cb2-3" tabindex="-1"></a>    <span class="fu">shinyTimer</span>(</span>
@@ -117,8 +116,13 @@
 <span id="cb2-33"><a href="#cb2-33" tabindex="-1"></a>}</span>
 <span id="cb2-34"><a href="#cb2-34" tabindex="-1"></a></span>
 <span id="cb2-35"><a href="#cb2-35" tabindex="-1"></a><span class="fu">shinyApp</span>(ui, server)</span></code></pre></div>
+</div>
+<div class="section level2">
+<h2 id="stopwatch">Stopwatch<a class="anchor" aria-label="anchor" href="#stopwatch"></a>
+</h2>
+<p>You can also use <code>shinyTimer</code> as a stopwatch. Simply trigger <code>shinyTimer</code> in your <code>server</code> with <code><a href="reference/countUp.html">countUp()</a></code>:</p>
 <div style="text-align: center;">
-<p><img src="man/figuress/shiny_timer_done.gif" alt=""></p>
+<p><img src="reference/figures/shiny_timer_up.gif" alt=""></p>
 </div>
 </div>
 </div>
