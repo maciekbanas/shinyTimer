@@ -33,7 +33,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="index.html">shinyTimer</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">0.0.0.9004</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">0.0.0.9005</span>
       </span>
     </div>
 
@@ -60,7 +60,78 @@
 </h1></div>
 <!-- badges: start -->
 
-<p><code>shinyTimer</code> allows users to easily integrate a countdown timer into their Shiny UI, providing real-time updates and server notification when the timer completes.</p>
+<p><code>shinyTimer</code> allows you to easily integrate a countdown timer into Shiny UI, providing real-time updates and server notification when the timer completes.</p>
+<p>In examples below I make use of <a href="https://github.com/RinteRface/shinyMobile/" class="external-link">shinyMobile</a> framework.</p>
+<div style="text-align: center;">
+<p><img src="inst/gifs/shiny_timer.gif" alt=""></p>
+</div>
+<div class="section level2">
+<h2 id="install">Install<a class="anchor" aria-label="anchor" href="#install"></a>
+</h2>
+<p>Development version:</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode R"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" tabindex="-1"></a><span class="co"># install.packages("remotes")</span></span>
+<span id="cb1-2"><a href="#cb1-2" tabindex="-1"></a>remotes<span class="sc">::</span><span class="fu">install_github</span>(<span class="st">"maciekbanas/shinyTimer"</span>)</span></code></pre></div>
+</div>
+<div class="section level2">
+<h2 id="how-it-works">How it works<a class="anchor" aria-label="anchor" href="#how-it-works"></a>
+</h2>
+<p>To get things work you need two functions:</p>
+<ul>
+<li>On <code>UI</code> side <code><a href="reference/shinyTimer.html">shinyTimer()</a></code> to add a widget.</li>
+<li>On <code>server</code> side <code><a href="reference/countDown.html">countDown()</a></code> to trigger counting.</li>
+</ul>
+<p><code><a href="reference/shinyTimer.html">shinyTimer()</a></code> is by default formatted as <code>simple</code> one, but you can switch <code>format</code> to a <code>clock</code>.</p>
+<div style="text-align: center;">
+<p><img src="inst/gifs/shiny_timer_update.gif" alt=""></p>
+</div>
+<p>You can either set only <code>seconds</code>, <code>minutes</code> or both.</p>
+<div style="text-align: center;">
+<p><img src="inst/gifs/shiny_timer_set_minutes.gif" alt=""></p>
+</div>
+</div>
+<div class="section level2">
+<h2 id="when-timer-completes">When timer completes<a class="anchor" aria-label="anchor" href="#when-timer-completes"></a>
+</h2>
+<p>Once the timer reaches <code>0</code> JavaScript sends <code>timer_done</code> value to Shiny <code>input</code>. You can use it to trigger an action (see example below).</p>
+<div class="sourceCode" id="cb2"><pre class="sourceCode R"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" tabindex="-1"></a>ui <span class="ot">&lt;-</span> shinyMobile<span class="sc">::</span><span class="fu">f7Page</span>(</span>
+<span id="cb2-2"><a href="#cb2-2" tabindex="-1"></a>  shinyMobile<span class="sc">::</span><span class="fu">f7Card</span>(</span>
+<span id="cb2-3"><a href="#cb2-3" tabindex="-1"></a>    <span class="fu">shinyTimer</span>(</span>
+<span id="cb2-4"><a href="#cb2-4" tabindex="-1"></a>      <span class="at">inputId =</span> <span class="st">"shiny_timer"</span>,</span>
+<span id="cb2-5"><a href="#cb2-5" tabindex="-1"></a>      <span class="at">startSeconds =</span> <span class="dv">10</span><span class="dt">L</span>, </span>
+<span id="cb2-6"><a href="#cb2-6" tabindex="-1"></a>      <span class="at">format =</span> <span class="st">"simple"</span>, </span>
+<span id="cb2-7"><a href="#cb2-7" tabindex="-1"></a>      <span class="at">style =</span> <span class="st">"font-weight: bold; font-size: 72px; text-align:center"</span></span>
+<span id="cb2-8"><a href="#cb2-8" tabindex="-1"></a>    ),</span>
+<span id="cb2-9"><a href="#cb2-9" tabindex="-1"></a>    shinyMobile<span class="sc">::</span><span class="fu">f7Button</span>(</span>
+<span id="cb2-10"><a href="#cb2-10" tabindex="-1"></a>      <span class="st">"start_timer"</span>,</span>
+<span id="cb2-11"><a href="#cb2-11" tabindex="-1"></a>      <span class="at">label =</span> <span class="st">"Start"</span>, </span>
+<span id="cb2-12"><a href="#cb2-12" tabindex="-1"></a>      <span class="at">size =</span> <span class="st">"large"</span>,</span>
+<span id="cb2-13"><a href="#cb2-13" tabindex="-1"></a>      <span class="at">rounded =</span> <span class="cn">TRUE</span>,</span>
+<span id="cb2-14"><a href="#cb2-14" tabindex="-1"></a>      <span class="at">color =</span> <span class="st">"orange"</span></span>
+<span id="cb2-15"><a href="#cb2-15" tabindex="-1"></a>    ) <span class="sc">|&gt;</span></span>
+<span id="cb2-16"><a href="#cb2-16" tabindex="-1"></a>      htmltools<span class="sc">::</span><span class="fu">tagAppendAttributes</span>(</span>
+<span id="cb2-17"><a href="#cb2-17" tabindex="-1"></a>        <span class="at">style=</span><span class="st">"font-size:20px;"</span></span>
+<span id="cb2-18"><a href="#cb2-18" tabindex="-1"></a>      )</span>
+<span id="cb2-19"><a href="#cb2-19" tabindex="-1"></a>  )</span>
+<span id="cb2-20"><a href="#cb2-20" tabindex="-1"></a>)</span>
+<span id="cb2-21"><a href="#cb2-21" tabindex="-1"></a></span>
+<span id="cb2-22"><a href="#cb2-22" tabindex="-1"></a>server <span class="ot">&lt;-</span> <span class="cf">function</span>(input, output, session) {</span>
+<span id="cb2-23"><a href="#cb2-23" tabindex="-1"></a>  shiny<span class="sc">::</span><span class="fu">observeEvent</span>(input<span class="sc">$</span>start_timer, {</span>
+<span id="cb2-24"><a href="#cb2-24" tabindex="-1"></a>    shinyTimer<span class="sc">::</span><span class="fu">countDown</span>(session, <span class="st">"shiny_timer"</span>)</span>
+<span id="cb2-25"><a href="#cb2-25" tabindex="-1"></a>  })</span>
+<span id="cb2-26"><a href="#cb2-26" tabindex="-1"></a>  shiny<span class="sc">::</span><span class="fu">observeEvent</span>(input<span class="sc">$</span>timer_done, {</span>
+<span id="cb2-27"><a href="#cb2-27" tabindex="-1"></a>    shinyMobile<span class="sc">::</span><span class="fu">f7Dialog</span>(</span>
+<span id="cb2-28"><a href="#cb2-28" tabindex="-1"></a>      <span class="at">id =</span> <span class="st">"dialog"</span>,</span>
+<span id="cb2-29"><a href="#cb2-29" tabindex="-1"></a>      <span class="at">title =</span> <span class="st">"Time's Up!"</span>,</span>
+<span id="cb2-30"><a href="#cb2-30" tabindex="-1"></a>      <span class="at">text =</span> <span class="st">""</span></span>
+<span id="cb2-31"><a href="#cb2-31" tabindex="-1"></a>    )</span>
+<span id="cb2-32"><a href="#cb2-32" tabindex="-1"></a>  })</span>
+<span id="cb2-33"><a href="#cb2-33" tabindex="-1"></a>}</span>
+<span id="cb2-34"><a href="#cb2-34" tabindex="-1"></a></span>
+<span id="cb2-35"><a href="#cb2-35" tabindex="-1"></a><span class="fu">shinyApp</span>(ui, server)</span></code></pre></div>
+<div style="text-align: center;">
+<p><img src="inst/gifs/shiny_timer_done.gif" alt=""></p>
+</div>
+</div>
 </div>
   </div>
 
