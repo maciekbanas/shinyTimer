@@ -1,0 +1,16 @@
+url: ~
+template:
+  bootstrap: 5
+  params:
+    assets:
+      - inst/gifs
+reference:
+- title: Widget (UI)
+  contents:
+  - '`shinyTimer`'
+- title: Update (server)
+  contents:
+  - '`updateShinyTimer`'
+- title: Actions (server)
+  contents:
+  - '`countDown`'
