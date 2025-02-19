@@ -1,5 +1,5 @@
 let timerInterval;
-Shiny.addCustomMessageHandler('startCountdown', function(message) {
+Shiny.addCustomMessageHandler('countDown', function(message) {
   const { inputId } = message;
   clearInterval(timerInterval);
   const countdownElement = document.getElementById(inputId);
@@ -19,6 +19,21 @@ Shiny.addCustomMessageHandler('startCountdown', function(message) {
   }, 1000);
 });
 
+Shiny.addCustomMessageHandler('countUp', function(message) {
+  const { inputId } = message;
+  clearInterval(timerInterval);
+  const countElement = document.getElementById(inputId);
+  let timeStart = parseInt(countElement.getAttribute('data-start-time'), 10);
+  const format = countElement.getAttribute('data-format');
+
+  countElement.textContent = formatTime(timeStart, format);
+  
+  timerInterval = setInterval(function() {
+    timeStart++;
+    countElement.textContent = formatTime(timeStart, format);
+  }, 1000);
+});
+
 function formatTime(time, format) {
   if (format === 'clock') {
     const minutes = Math.floor(time / 60);
@@ -28,6 +43,10 @@ function formatTime(time, format) {
     return time;
   }
 };
+
+Shiny.addCustomMessageHandler('stopTimer', function(message) {
+  clearInterval(timerInterval);
+});
 
 Shiny.addCustomMessageHandler('updateShinyTimer', function(message) {
   const { inputId, start, format, label } = message;

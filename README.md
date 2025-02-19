@@ -30,10 +30,8 @@ Development version:
 
 ## How it works
 
-To get things work you need two functions:
-
-- On `UI` side `shinyTimer()` to add a widget.
-- On `server` side `countDown()` to trigger counting.
+To get things work you need to add in your `UI` `shinyTimer()` and
+trigger an action in your `server` (e.g. `countDown()`).
 
 `shinyTimer()` is by default formatted as `simple` one, but you can
 switch `format` to a `clock`.
@@ -56,6 +54,12 @@ You can either set only `seconds`, `minutes` or both.
 
 Once the timer reaches `0` JavaScript sends `timer_done` value to Shiny
 `input`. You can use it to trigger an action (see example below).
+
+<div style="text-align: center;">
+
+<img src="man/figures/shiny_timer_done.gif" alt=""/>
+
+</div>
 
     ui <- shinyMobile::f7Page(
       shinyMobile::f7Card(
@@ -93,8 +97,13 @@ Once the timer reaches `0` JavaScript sends `timer_done` value to Shiny
 
     shinyApp(ui, server)
 
+## Stopwatch
+
+You can also use `shinyTimer` as a stopwatch. Simply trigger
+`shinyTimer` in your `server` with `countUp()`:
+
 <div style="text-align: center;">
 
-<img src="man/figuress/shiny_timer_done.gif" alt=""/>
+<img src="man/figures/shiny_timer_up.gif" alt=""/>
 
 </div>
