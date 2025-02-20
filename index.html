@@ -22,7 +22,7 @@
 
     <a class="navbar-brand me-2" href="index.html">shinyTimer</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.0.0.9010</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.0.0.9011</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -65,6 +65,25 @@
 <h2 id="how-it-works">How it works<a class="anchor" aria-label="anchor" href="#how-it-works"></a>
 </h2>
 <p>To get things work you need to add in your <code>UI</code> <code><a href="reference/shinyTimer.html">shinyTimer()</a></code> and trigger an action in your <code>server</code> (e.g. <code><a href="reference/countDown.html">countDown()</a></code>).</p>
+<p>Try it out:</p>
+<div class="sourceCode" id="cb2"><pre class="sourceCode R"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" tabindex="-1"></a>ui <span class="ot">&lt;-</span> shinyMobile<span class="sc">::</span><span class="fu">f7Page</span>(</span>
+<span id="cb2-2"><a href="#cb2-2" tabindex="-1"></a>  shinyMobile<span class="sc">::</span><span class="fu">f7Card</span>(</span>
+<span id="cb2-3"><a href="#cb2-3" tabindex="-1"></a>    shinyTimer<span class="sc">::</span><span class="fu">shinyTimer</span>(</span>
+<span id="cb2-4"><a href="#cb2-4" tabindex="-1"></a>      <span class="at">inputId =</span> <span class="st">"shiny_timer"</span>,</span>
+<span id="cb2-5"><a href="#cb2-5" tabindex="-1"></a>      <span class="at">seconds =</span> <span class="dv">10</span><span class="dt">L</span>, </span>
+<span id="cb2-6"><a href="#cb2-6" tabindex="-1"></a>      <span class="at">format =</span> <span class="st">"simple"</span>, </span>
+<span id="cb2-7"><a href="#cb2-7" tabindex="-1"></a>      <span class="at">style =</span> <span class="st">"font-weight: bold; font-size: 72px; text-align:center"</span></span>
+<span id="cb2-8"><a href="#cb2-8" tabindex="-1"></a>    )</span>
+<span id="cb2-9"><a href="#cb2-9" tabindex="-1"></a>  )</span>
+<span id="cb2-10"><a href="#cb2-10" tabindex="-1"></a>)</span>
+<span id="cb2-11"><a href="#cb2-11" tabindex="-1"></a></span>
+<span id="cb2-12"><a href="#cb2-12" tabindex="-1"></a>server <span class="ot">&lt;-</span> <span class="cf">function</span>(input, output, session) {</span>
+<span id="cb2-13"><a href="#cb2-13" tabindex="-1"></a>  shiny<span class="sc">::</span><span class="fu">observe</span>({</span>
+<span id="cb2-14"><a href="#cb2-14" tabindex="-1"></a>    shinyTimer<span class="sc">::</span><span class="fu">countDown</span>(session, <span class="st">"shiny_timer"</span>)</span>
+<span id="cb2-15"><a href="#cb2-15" tabindex="-1"></a>  })</span>
+<span id="cb2-16"><a href="#cb2-16" tabindex="-1"></a>}</span>
+<span id="cb2-17"><a href="#cb2-17" tabindex="-1"></a></span>
+<span id="cb2-18"><a href="#cb2-18" tabindex="-1"></a><span class="fu">shinyApp</span>(ui, server)</span></code></pre></div>
 <p><code><a href="reference/shinyTimer.html">shinyTimer()</a></code> is by default formatted as <code>simple</code> one, but you can switch <code>format</code> to a <code>clock</code>.</p>
 <div style="text-align: center;">
 <p><img src="reference/figures/shiny_timer_update.gif" alt=""></p>
@@ -81,41 +100,41 @@
 <div style="text-align: center;">
 <p><img src="reference/figures/shiny_timer_done.gif" alt=""></p>
 </div>
-<div class="sourceCode" id="cb2"><pre class="sourceCode R"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" tabindex="-1"></a>ui <span class="ot">&lt;-</span> shinyMobile<span class="sc">::</span><span class="fu">f7Page</span>(</span>
-<span id="cb2-2"><a href="#cb2-2" tabindex="-1"></a>  shinyMobile<span class="sc">::</span><span class="fu">f7Card</span>(</span>
-<span id="cb2-3"><a href="#cb2-3" tabindex="-1"></a>    <span class="fu">shinyTimer</span>(</span>
-<span id="cb2-4"><a href="#cb2-4" tabindex="-1"></a>      <span class="at">inputId =</span> <span class="st">"shiny_timer"</span>,</span>
-<span id="cb2-5"><a href="#cb2-5" tabindex="-1"></a>      <span class="at">seconds =</span> <span class="dv">10</span><span class="dt">L</span>, </span>
-<span id="cb2-6"><a href="#cb2-6" tabindex="-1"></a>      <span class="at">format =</span> <span class="st">"simple"</span>, </span>
-<span id="cb2-7"><a href="#cb2-7" tabindex="-1"></a>      <span class="at">style =</span> <span class="st">"font-weight: bold; font-size: 72px; text-align:center"</span></span>
-<span id="cb2-8"><a href="#cb2-8" tabindex="-1"></a>    ),</span>
-<span id="cb2-9"><a href="#cb2-9" tabindex="-1"></a>    shinyMobile<span class="sc">::</span><span class="fu">f7Button</span>(</span>
-<span id="cb2-10"><a href="#cb2-10" tabindex="-1"></a>      <span class="st">"start_timer"</span>,</span>
-<span id="cb2-11"><a href="#cb2-11" tabindex="-1"></a>      <span class="at">label =</span> <span class="st">"Start"</span>, </span>
-<span id="cb2-12"><a href="#cb2-12" tabindex="-1"></a>      <span class="at">size =</span> <span class="st">"large"</span>,</span>
-<span id="cb2-13"><a href="#cb2-13" tabindex="-1"></a>      <span class="at">rounded =</span> <span class="cn">TRUE</span>,</span>
-<span id="cb2-14"><a href="#cb2-14" tabindex="-1"></a>      <span class="at">color =</span> <span class="st">"orange"</span></span>
-<span id="cb2-15"><a href="#cb2-15" tabindex="-1"></a>    ) <span class="sc">|&gt;</span></span>
-<span id="cb2-16"><a href="#cb2-16" tabindex="-1"></a>      htmltools<span class="sc">::</span><span class="fu">tagAppendAttributes</span>(</span>
-<span id="cb2-17"><a href="#cb2-17" tabindex="-1"></a>        <span class="at">style=</span><span class="st">"font-size:20px;"</span></span>
-<span id="cb2-18"><a href="#cb2-18" tabindex="-1"></a>      )</span>
-<span id="cb2-19"><a href="#cb2-19" tabindex="-1"></a>  )</span>
-<span id="cb2-20"><a href="#cb2-20" tabindex="-1"></a>)</span>
-<span id="cb2-21"><a href="#cb2-21" tabindex="-1"></a></span>
-<span id="cb2-22"><a href="#cb2-22" tabindex="-1"></a>server <span class="ot">&lt;-</span> <span class="cf">function</span>(input, output, session) {</span>
-<span id="cb2-23"><a href="#cb2-23" tabindex="-1"></a>  shiny<span class="sc">::</span><span class="fu">observeEvent</span>(input<span class="sc">$</span>start_timer, {</span>
-<span id="cb2-24"><a href="#cb2-24" tabindex="-1"></a>    shinyTimer<span class="sc">::</span><span class="fu">countDown</span>(session, <span class="st">"shiny_timer"</span>)</span>
-<span id="cb2-25"><a href="#cb2-25" tabindex="-1"></a>  })</span>
-<span id="cb2-26"><a href="#cb2-26" tabindex="-1"></a>  shiny<span class="sc">::</span><span class="fu">observeEvent</span>(input<span class="sc">$</span>timer_done, {</span>
-<span id="cb2-27"><a href="#cb2-27" tabindex="-1"></a>    shinyMobile<span class="sc">::</span><span class="fu">f7Dialog</span>(</span>
-<span id="cb2-28"><a href="#cb2-28" tabindex="-1"></a>      <span class="at">id =</span> <span class="st">"dialog"</span>,</span>
-<span id="cb2-29"><a href="#cb2-29" tabindex="-1"></a>      <span class="at">title =</span> <span class="st">"Time's Up!"</span>,</span>
-<span id="cb2-30"><a href="#cb2-30" tabindex="-1"></a>      <span class="at">text =</span> <span class="st">""</span></span>
-<span id="cb2-31"><a href="#cb2-31" tabindex="-1"></a>    )</span>
-<span id="cb2-32"><a href="#cb2-32" tabindex="-1"></a>  })</span>
-<span id="cb2-33"><a href="#cb2-33" tabindex="-1"></a>}</span>
-<span id="cb2-34"><a href="#cb2-34" tabindex="-1"></a></span>
-<span id="cb2-35"><a href="#cb2-35" tabindex="-1"></a><span class="fu">shinyApp</span>(ui, server)</span></code></pre></div>
+<div class="sourceCode" id="cb3"><pre class="sourceCode R"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" tabindex="-1"></a>ui <span class="ot">&lt;-</span> shinyMobile<span class="sc">::</span><span class="fu">f7Page</span>(</span>
+<span id="cb3-2"><a href="#cb3-2" tabindex="-1"></a>  shinyMobile<span class="sc">::</span><span class="fu">f7Card</span>(</span>
+<span id="cb3-3"><a href="#cb3-3" tabindex="-1"></a>    shinyTimer<span class="sc">::</span><span class="fu">shinyTimer</span>(</span>
+<span id="cb3-4"><a href="#cb3-4" tabindex="-1"></a>      <span class="at">inputId =</span> <span class="st">"shiny_timer"</span>,</span>
+<span id="cb3-5"><a href="#cb3-5" tabindex="-1"></a>      <span class="at">seconds =</span> <span class="dv">10</span><span class="dt">L</span>, </span>
+<span id="cb3-6"><a href="#cb3-6" tabindex="-1"></a>      <span class="at">format =</span> <span class="st">"simple"</span>, </span>
+<span id="cb3-7"><a href="#cb3-7" tabindex="-1"></a>      <span class="at">style =</span> <span class="st">"font-weight: bold; font-size: 72px; text-align:center"</span></span>
+<span id="cb3-8"><a href="#cb3-8" tabindex="-1"></a>    ),</span>
+<span id="cb3-9"><a href="#cb3-9" tabindex="-1"></a>    shinyMobile<span class="sc">::</span><span class="fu">f7Button</span>(</span>
+<span id="cb3-10"><a href="#cb3-10" tabindex="-1"></a>      <span class="st">"start_timer"</span>,</span>
+<span id="cb3-11"><a href="#cb3-11" tabindex="-1"></a>      <span class="at">label =</span> <span class="st">"Start"</span>, </span>
+<span id="cb3-12"><a href="#cb3-12" tabindex="-1"></a>      <span class="at">size =</span> <span class="st">"large"</span>,</span>
+<span id="cb3-13"><a href="#cb3-13" tabindex="-1"></a>      <span class="at">rounded =</span> <span class="cn">TRUE</span>,</span>
+<span id="cb3-14"><a href="#cb3-14" tabindex="-1"></a>      <span class="at">color =</span> <span class="st">"orange"</span></span>
+<span id="cb3-15"><a href="#cb3-15" tabindex="-1"></a>    ) <span class="sc">|&gt;</span></span>
+<span id="cb3-16"><a href="#cb3-16" tabindex="-1"></a>      htmltools<span class="sc">::</span><span class="fu">tagAppendAttributes</span>(</span>
+<span id="cb3-17"><a href="#cb3-17" tabindex="-1"></a>        <span class="at">style=</span><span class="st">"font-size:20px;"</span></span>
+<span id="cb3-18"><a href="#cb3-18" tabindex="-1"></a>      )</span>
+<span id="cb3-19"><a href="#cb3-19" tabindex="-1"></a>  )</span>
+<span id="cb3-20"><a href="#cb3-20" tabindex="-1"></a>)</span>
+<span id="cb3-21"><a href="#cb3-21" tabindex="-1"></a></span>
+<span id="cb3-22"><a href="#cb3-22" tabindex="-1"></a>server <span class="ot">&lt;-</span> <span class="cf">function</span>(input, output, session) {</span>
+<span id="cb3-23"><a href="#cb3-23" tabindex="-1"></a>  shiny<span class="sc">::</span><span class="fu">observeEvent</span>(input<span class="sc">$</span>start_timer, {</span>
+<span id="cb3-24"><a href="#cb3-24" tabindex="-1"></a>    shinyTimer<span class="sc">::</span><span class="fu">countDown</span>(session, <span class="st">"shiny_timer"</span>)</span>
+<span id="cb3-25"><a href="#cb3-25" tabindex="-1"></a>  })</span>
+<span id="cb3-26"><a href="#cb3-26" tabindex="-1"></a>  shiny<span class="sc">::</span><span class="fu">observeEvent</span>(input<span class="sc">$</span>timer_done, {</span>
+<span id="cb3-27"><a href="#cb3-27" tabindex="-1"></a>    shinyMobile<span class="sc">::</span><span class="fu">f7Dialog</span>(</span>
+<span id="cb3-28"><a href="#cb3-28" tabindex="-1"></a>      <span class="at">id =</span> <span class="st">"dialog"</span>,</span>
+<span id="cb3-29"><a href="#cb3-29" tabindex="-1"></a>      <span class="at">title =</span> <span class="st">"Time's Up!"</span>,</span>
+<span id="cb3-30"><a href="#cb3-30" tabindex="-1"></a>      <span class="at">text =</span> <span class="st">""</span></span>
+<span id="cb3-31"><a href="#cb3-31" tabindex="-1"></a>    )</span>
+<span id="cb3-32"><a href="#cb3-32" tabindex="-1"></a>  })</span>
+<span id="cb3-33"><a href="#cb3-33" tabindex="-1"></a>}</span>
+<span id="cb3-34"><a href="#cb3-34" tabindex="-1"></a></span>
+<span id="cb3-35"><a href="#cb3-35" tabindex="-1"></a><span class="fu">shinyApp</span>(ui, server)</span></code></pre></div>
 </div>
 <div class="section level2">
 <h2 id="stopwatch">Stopwatch<a class="anchor" aria-label="anchor" href="#stopwatch"></a>
