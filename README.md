@@ -33,6 +33,27 @@ Development version:
 To get things work you need to add in your `UI` `shinyTimer()` and
 trigger an action in your `server` (e.g. `countDown()`).
 
+Try it out:
+
+    ui <- shinyMobile::f7Page(
+      shinyMobile::f7Card(
+        shinyTimer::shinyTimer(
+          inputId = "shiny_timer",
+          seconds = 10L, 
+          format = "simple", 
+          style = "font-weight: bold; font-size: 72px; text-align:center"
+        )
+      )
+    )
+
+    server <- function(input, output, session) {
+      shiny::observe({
+        shinyTimer::countDown(session, "shiny_timer")
+      })
+    }
+
+    shinyApp(ui, server)
+
 `shinyTimer()` is by default formatted as `simple` one, but you can
 switch `format` to a `clock`.
 
@@ -63,7 +84,7 @@ Once the timer reaches `0` JavaScript sends `timer_done` value to Shiny
 
     ui <- shinyMobile::f7Page(
       shinyMobile::f7Card(
-        shinyTimer(
+        shinyTimer::shinyTimer(
           inputId = "shiny_timer",
           seconds = 10L, 
           format = "simple", 
