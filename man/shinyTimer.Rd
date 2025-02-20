@@ -22,7 +22,7 @@ shinyTimer(
 
 \item{seconds}{An integer, the starting time in seconds for the countdown.}
 
-\item{format}{The format of the countdown timer display (either "simple" or "clock").}
+\item{format}{The format of the countdown timer display ("simple", "clock", or "stopwatch").}
 
 \item{...}{Any additional parameters you want to pass to the placeholder for the timer (\code{htmltools::tags$div}).}
 }

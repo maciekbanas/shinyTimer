@@ -22,7 +22,7 @@ updateShinyTimer(
 
 \item{seconds}{The new starting time in seconds for the countdown.}
 
-\item{format}{The new format of the countdown timer display (either "simple" or "clock").}
+\item{format}{The new format of the countdown timer display ("simple", "clock", or "stopwatch").}
 
 \item{label}{The new label to be displayed above the countdown timer.}
 }
