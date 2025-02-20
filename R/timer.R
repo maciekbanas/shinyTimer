@@ -4,7 +4,7 @@
 #' @param label The label to display above the countdown.
 #' @param minutes An integer, the starting time in minutes for the countdown.
 #' @param seconds An integer, the starting time in seconds for the countdown.
-#' @param format The format of the countdown timer display (either "simple" or "clock").
+#' @param format The format of the countdown timer display ("simple", "clock", or "stopwatch").
 #' @param ... Any additional parameters you want to pass to the placeholder for the timer (`htmltools::tags$div`).
 #'
 #' @return A shiny UI component for the countdown timer.
@@ -12,21 +12,18 @@
 shinyTimer <- function(inputId, label = NULL, minutes = 0, seconds = 0, format = "simple", ...) {
   addResourcePath("shinyTimer", system.file("www", package = "shinyTimer"))
   
-  if (!format %in% c("simple", "clock")) {
-    stop("Invalid format. Choose either 'simple' or 'clock'.")
+  if (!format %in% c("simple", "clock", "stopwatch")) {
+    stop("Invalid format. Choose either 'simple', 'clock', or 'stopwatch'.")
   }
   
-  totalseconds <- (minutes * 60) + seconds
+  totalseconds <- minutes * 60 + seconds
   
-  formatTime <- function(time, format) {
-    if (format == "clock") {
-      minutes <- floor(time / 60)
-      seconds <- time %% 60
-      return(sprintf("%02d:%02d", minutes, seconds))
-    } else {
-      return(as.character(time))
-    }
-  }
+  initial_display <- switch(
+    format,
+    "simple" = as.character(totalseconds),
+    "clock" = sprintf("%02d:%02d", floor(totalseconds / 60), totalseconds %% 60),
+    "stopwatch" = sprintf("%02d:%02d:%02d", floor(totalseconds / 60), floor(totalseconds %% 60), 0)
+  )
   
   shiny::tagList(
     if (!is.null(label)) htmltools::tags$label(label, `for` = inputId),
@@ -35,7 +32,7 @@ shinyTimer <- function(inputId, label = NULL, minutes = 0, seconds = 0, format =
       class = "shiny-timer",
       `data-start-time` = totalseconds,
       `data-format` = format,
-      formatTime(totalseconds, format),
+      initial_display,
       ...
     ),
     htmltools::tags$script(src = "shinyTimer/timer.js")
@@ -48,7 +45,7 @@ shinyTimer <- function(inputId, label = NULL, minutes = 0, seconds = 0, format =
 #' @param inputId The input ID corresponding to the UI element.
 #' @param minutes The new starting time in minutes for the countdown.
 #' @param seconds The new starting time in seconds for the countdown.
-#' @param format The new format of the countdown timer display (either "simple" or "clock").
+#' @param format The new format of the countdown timer display ("simple", "clock", or "stopwatch").
 #' @param label The new label to be displayed above the countdown timer.
 #'
 #' @export
@@ -97,14 +94,4 @@ countUp <- function(session, inputId) {
 #' @export
 stopTimer <- function(session, inputId) {
   session$sendCustomMessage('stopTimer', list(inputId = inputId))
-}
-
-formatTime <- function(time, format) {
-  if (format == "clock") {
-    minutes <- floor(time / 60)
-    seconds <- time %% 60
-    return(sprintf("%02d:%02d", minutes, seconds))
-  } else {
-    return(as.character(time))
-  }
 }

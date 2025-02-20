@@ -55,11 +55,11 @@ Try it out:
     shinyApp(ui, server)
 
 `shinyTimer()` is by default formatted as `simple` one, but you can
-switch `format` to a `clock`.
+switch `format` to a `clock` or a `stopwatch` (with `centiseconds`).
 
 <div style="text-align: center;">
 
-<img src="man/figures/shiny_timer_update.gif" alt=""/>
+<img src="man/figures/shiny_timer_format.gif" alt=""/>
 
 </div>
 
@@ -128,3 +128,48 @@ You can also use `shinyTimer` as a stopwatch. Simply trigger
 <img src="man/figures/shiny_timer_up.gif" alt=""/>
 
 </div>
+
+    ui <- shinyMobile::f7Page(
+      shinyMobile::f7Card(
+        shinyTimer::shinyTimer(
+          inputId = "shiny_timer",
+          seconds = 0L, 
+          format = "clock", 
+          style = "font-weight: bold; font-size: 72px; text-align:center"
+        ),
+        shinyMobile::f7Block(
+          shinyMobile::f7Button(
+            "start_timer",
+            label = "Start", 
+            size = "large",
+            rounded = TRUE,
+            color = "green"
+          ) |>
+            htmltools::tagAppendAttributes(
+              style="font-size:20px;"
+            ),
+          shinyMobile::f7Button(
+            "stop_timer",
+            label = "Stop", 
+            size = "large",
+            rounded = TRUE,
+            color = "orange"
+          ) |>
+            htmltools::tagAppendAttributes(
+              style="font-size:20px;"
+            )
+        )
+        
+      )
+    )
+
+    server <- function(input, output, session) {
+      shiny::observeEvent(input$start_timer, {
+        shinyTimer::countUp(session, "shiny_timer")
+      })
+      shiny::observeEvent(input$stop_timer, {
+        shinyTimer::stopTimer(session, "shiny_timer")
+      })
+    }
+
+    shinyApp(ui, server)

@@ -11,8 +11,19 @@ ui <- shinyMobile::f7Page(
     shinyMobile::f7Select(
       inputId = "timer_format",
       label = NULL,
-      choices = c("simple", "clock")
-    )
+      choices = c("simple", "clock", "stopwatch")
+    ),
+    shiny::br(),
+    shinyMobile::f7Button(
+      "start_timer",
+      label = "Start", 
+      size = "large",
+      rounded = TRUE,
+      color = "orange"
+    ) |>
+      htmltools::tagAppendAttributes(
+        style="font-size:20px;"
+      )
   )
 )
 
