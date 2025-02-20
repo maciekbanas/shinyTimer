@@ -5,13 +5,13 @@ ui <- shinyMobile::f7Page(
     shinyTimer(
       inputId = "shiny_timer",
       seconds = 10L, 
-      format = "simple", 
+      type = "simple", 
       style = "font-weight: bold; font-size: 72px; text-align:center"
     ),
     shinyMobile::f7Select(
       inputId = "timer_format",
       label = NULL,
-      choices = c("simple", "clock", "stopwatch")
+      choices = c("simple", "mm:ss", "hh:mm:ss", "mm:ss.cs")
     ),
     shiny::br(),
     shinyMobile::f7Button(
@@ -40,4 +40,4 @@ server <- function(input, output, session) {
   })
 }
 
-shinyApp(ui, server)
+shiny::shinyApp(ui, server)
