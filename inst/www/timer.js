@@ -30,13 +30,13 @@ Shiny.addCustomMessageHandler('countDown', function(message) {
   countdownElement.textContent = formatTime(timeLeft, type);
 
   timerInterval = setInterval(function() {
-    timeLeft -= 0.01;
-    countdownElement.textContent = formatTime(timeLeft, type);
-
     if (timeLeft <= 0) {
       clearInterval(timerInterval);
       countdownElement.textContent = formatTime(0, type);
       Shiny.setInputValue('timer_done', true);
+    } else {
+      timeLeft -= 0.01;
+      countdownElement.textContent = formatTime(timeLeft, type);
     }
   }, 10);
 });
@@ -49,7 +49,7 @@ Shiny.addCustomMessageHandler('countUp', function(message) {
   const type = countElement.getAttribute('data-type');
 
   countElement.textContent = formatTime(timeStart, type);
-  
+
   timerInterval = setInterval(function() {
     timeStart += 0.01;
     countElement.textContent = formatTime(timeStart, type);
@@ -64,12 +64,12 @@ Shiny.addCustomMessageHandler('updateShinyTimer', function(message) {
   const { inputId, start, type, label } = message;
   const countdownElement = document.getElementById(inputId);
   const labelElement = document.querySelector(`label[for=${inputId}]`);
-  
+
   if (!countdownElement) {
     console.error(`Element with ID ${inputId} not found.`);
     return;
   }
-  
+
   clearInterval(timerInterval);
 
   if (start !== undefined) {
@@ -83,10 +83,7 @@ Shiny.addCustomMessageHandler('updateShinyTimer', function(message) {
   if (label !== undefined && labelElement) {
     labelElement.textContent = label;
   }
-  
-  const currentStartTime = parseFloat(countdownElement.getAttribute('data-start-time'));
-  const currentType = countdownElement.getAttribute('data-type');
-  let timeLeft = currentStartTime;
 
-  countdownElement.textContent = formatTime(timeLeft, currentType);
+  const currentStartTime = parseFloat(countdownElement.getAttribute('data-start-time'));
+  countdownElement.textContent = formatTime(currentStartTime, type);
 });

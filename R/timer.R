@@ -2,6 +2,7 @@
 #'
 #' @param inputId The input id.
 #' @param label The label to display above the countdown.
+#' @param hours An integer, the starting time in hours for the countdown.
 #' @param minutes An integer, the starting time in minutes for the countdown.
 #' @param seconds An integer, the starting time in seconds for the countdown.
 #' @param type The type of the countdown timer display ("simple", "mm:ss", "hh:mm:ss", "mm:ss.cs").
@@ -9,14 +10,14 @@
 #'
 #' @return A shiny UI component for the countdown timer.
 #' @export
-shinyTimer <- function(inputId, label = NULL, minutes = 0, seconds = 0, type = "simple", ...) {
+shinyTimer <- function(inputId, label = NULL, hours = 0, minutes = 0, seconds = 0, type = "simple", ...) {
   shiny::addResourcePath("shinyTimer", system.file("www", package = "shinyTimer"))
   
   if (!type %in% c("simple", "mm:ss", "hh:mm:ss", "mm:ss.cs")) {
     stop("Invalid type. Choose 'simple', 'mm:ss', 'hh:mm:ss', or 'mm:ss.cs'.")
   }
   
-  totalseconds <- minutes * 60 + seconds
+  totalseconds <- (hours * 3600) + (minutes * 60) + seconds
   
   initial_display <- switch(
     type,
@@ -44,21 +45,22 @@ shinyTimer <- function(inputId, label = NULL, minutes = 0, seconds = 0, type = "
 #'
 #' @param session The session object from the shiny server function.
 #' @param inputId The input ID corresponding to the UI element.
+#' @param hours The new starting time in hours for the countdown.
 #' @param minutes The new starting time in minutes for the countdown.
 #' @param seconds The new starting time in seconds for the countdown.
 #' @param type The new type of the countdown timer display ("simple", "mm:ss", "hh:mm:ss", "mm:ss.cs").
 #' @param label The new label to be displayed above the countdown timer.
 #'
 #' @export
-updateShinyTimer <- function(session, inputId, minutes = NULL, seconds = NULL, type = NULL, label = NULL) {
+updateShinyTimer <- function(session, inputId, hours = NULL, minutes = NULL, seconds = NULL, type = NULL, label = NULL) {
   message <- list(inputId = inputId)
   
-  if (!is.null(minutes) && !is.null(seconds)) {
-    message$start <- (minutes * 60) + seconds
-  } else if (!is.null(minutes)) {
-    message$start <- minutes * 60
-  } else if (!is.null(seconds)) {
-    message$start <- seconds
+  if (!is.null(hours) || !is.null(minutes) || !is.null(seconds)) {
+    total_seconds <- 0
+    if (!is.null(hours)) total_seconds <- total_seconds + (hours * 3600)
+    if (!is.null(minutes)) total_seconds <- total_seconds + (minutes * 60)
+    if (!is.null(seconds)) total_seconds <- total_seconds + seconds
+    message$start = total_seconds
   }
   
   if (!is.null(type)) message$type <- type

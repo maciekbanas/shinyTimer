@@ -7,9 +7,10 @@
 shinyTimer(
   inputId,
   label = NULL,
+  hours = 0,
   minutes = 0,
   seconds = 0,
-  format = "simple",
+  type = "simple",
   ...
 )
 }
@@ -18,11 +19,13 @@ shinyTimer(
 
 \item{label}{The label to display above the countdown.}
 
+\item{hours}{An integer, the starting time in hours for the countdown.}
+
 \item{minutes}{An integer, the starting time in minutes for the countdown.}
 
 \item{seconds}{An integer, the starting time in seconds for the countdown.}
 
-\item{format}{The format of the countdown timer display ("simple", "clock", or "stopwatch").}
+\item{type}{The type of the countdown timer display ("simple", "mm:ss", "hh:mm:ss", "mm:ss.cs").}
 
 \item{...}{Any additional parameters you want to pass to the placeholder for the timer (\code{htmltools::tags$div}).}
 }

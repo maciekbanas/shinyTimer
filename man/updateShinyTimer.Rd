@@ -7,9 +7,10 @@
 updateShinyTimer(
   session,
   inputId,
+  hours = NULL,
   minutes = NULL,
   seconds = NULL,
-  format = NULL,
+  type = NULL,
   label = NULL
 )
 }
@@ -18,11 +19,13 @@ updateShinyTimer(
 
 \item{inputId}{The input ID corresponding to the UI element.}
 
+\item{hours}{The new starting time in hours for the countdown.}
+
 \item{minutes}{The new starting time in minutes for the countdown.}
 
 \item{seconds}{The new starting time in seconds for the countdown.}
 
-\item{format}{The new format of the countdown timer display ("simple", "clock", or "stopwatch").}
+\item{type}{The new type of the countdown timer display ("simple", "mm:ss", "hh:mm:ss", "mm:ss.cs").}
 
 \item{label}{The new label to be displayed above the countdown timer.}
 }
