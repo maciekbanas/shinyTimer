@@ -6,6 +6,7 @@ ui <- shinyMobile::f7Page(
       inputId = "shiny_timer",
       seconds = 10L, 
       type = "simple", 
+      background = "circle",
       style = "font-weight: bold; font-size: 72px; text-align:center"
     ),
     shinyMobile::f7Button(
