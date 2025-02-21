@@ -22,7 +22,7 @@
 
     <a class="navbar-brand me-2" href="index.html">shinyTimer</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.0.0.9012</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.0.0.9013</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -71,7 +71,7 @@
 <span id="cb2-3"><a href="#cb2-3" tabindex="-1"></a>    shinyTimer<span class="sc">::</span><span class="fu">shinyTimer</span>(</span>
 <span id="cb2-4"><a href="#cb2-4" tabindex="-1"></a>      <span class="at">inputId =</span> <span class="st">"shiny_timer"</span>,</span>
 <span id="cb2-5"><a href="#cb2-5" tabindex="-1"></a>      <span class="at">seconds =</span> <span class="dv">10</span><span class="dt">L</span>, </span>
-<span id="cb2-6"><a href="#cb2-6" tabindex="-1"></a>      <span class="at">format =</span> <span class="st">"simple"</span>, </span>
+<span id="cb2-6"><a href="#cb2-6" tabindex="-1"></a>      <span class="at">type =</span> <span class="st">"simple"</span>, </span>
 <span id="cb2-7"><a href="#cb2-7" tabindex="-1"></a>      <span class="at">style =</span> <span class="st">"font-weight: bold; font-size: 72px; text-align:center"</span></span>
 <span id="cb2-8"><a href="#cb2-8" tabindex="-1"></a>    )</span>
 <span id="cb2-9"><a href="#cb2-9" tabindex="-1"></a>  )</span>
@@ -84,13 +84,13 @@
 <span id="cb2-16"><a href="#cb2-16" tabindex="-1"></a>}</span>
 <span id="cb2-17"><a href="#cb2-17" tabindex="-1"></a></span>
 <span id="cb2-18"><a href="#cb2-18" tabindex="-1"></a><span class="fu">shinyApp</span>(ui, server)</span></code></pre></div>
-<p><code><a href="reference/shinyTimer.html">shinyTimer()</a></code> is by default formatted as <code>simple</code> one, but you can switch <code>format</code> to a <code>clock</code> or a <code>stopwatch</code> (with <code>centiseconds</code>).</p>
+<p><code><a href="reference/shinyTimer.html">shinyTimer()</a></code> is by default a <code>simple</code> one, but you can switch to clock types by passing <code>mm:ss</code>, <code>hh:mm:ss</code> or <code>mm:ss.cs</code> (with <code>centiseconds</code>) to <code>type</code> parameter.</p>
 <div style="text-align: center;">
-<p><img src="reference/figures/shiny_timer_format.gif" alt=""></p>
+<p><img src="reference/figures/shiny_timer_type.gif" alt=""></p>
 </div>
-<p>You can either set only <code>seconds</code>, <code>minutes</code> or both.</p>
+<p>You can either set <code>seconds</code>, <code>minutes</code> or <code>hours</code>.</p>
 <div style="text-align: center;">
-<p><img src="reference/figures/shiny_timer_set_minutes.gif" alt=""></p>
+<p><img src="reference/figures/shiny_timer_set.gif" alt=""></p>
 </div>
 </div>
 <div class="section level2">
@@ -105,7 +105,7 @@
 <span id="cb3-3"><a href="#cb3-3" tabindex="-1"></a>    shinyTimer<span class="sc">::</span><span class="fu">shinyTimer</span>(</span>
 <span id="cb3-4"><a href="#cb3-4" tabindex="-1"></a>      <span class="at">inputId =</span> <span class="st">"shiny_timer"</span>,</span>
 <span id="cb3-5"><a href="#cb3-5" tabindex="-1"></a>      <span class="at">seconds =</span> <span class="dv">10</span><span class="dt">L</span>, </span>
-<span id="cb3-6"><a href="#cb3-6" tabindex="-1"></a>      <span class="at">format =</span> <span class="st">"simple"</span>, </span>
+<span id="cb3-6"><a href="#cb3-6" tabindex="-1"></a>      <span class="at">type =</span> <span class="st">"simple"</span>, </span>
 <span id="cb3-7"><a href="#cb3-7" tabindex="-1"></a>      <span class="at">style =</span> <span class="st">"font-weight: bold; font-size: 72px; text-align:center"</span></span>
 <span id="cb3-8"><a href="#cb3-8" tabindex="-1"></a>    ),</span>
 <span id="cb3-9"><a href="#cb3-9" tabindex="-1"></a>    shinyMobile<span class="sc">::</span><span class="fu">f7Button</span>(</span>
@@ -148,7 +148,7 @@
 <span id="cb4-3"><a href="#cb4-3" tabindex="-1"></a>    shinyTimer<span class="sc">::</span><span class="fu">shinyTimer</span>(</span>
 <span id="cb4-4"><a href="#cb4-4" tabindex="-1"></a>      <span class="at">inputId =</span> <span class="st">"shiny_timer"</span>,</span>
 <span id="cb4-5"><a href="#cb4-5" tabindex="-1"></a>      <span class="at">seconds =</span> <span class="dv">0</span><span class="dt">L</span>, </span>
-<span id="cb4-6"><a href="#cb4-6" tabindex="-1"></a>      <span class="at">format =</span> <span class="st">"clock"</span>, </span>
+<span id="cb4-6"><a href="#cb4-6" tabindex="-1"></a>      <span class="at">type =</span> <span class="st">"mm:ss.cs"</span>, </span>
 <span id="cb4-7"><a href="#cb4-7" tabindex="-1"></a>      <span class="at">style =</span> <span class="st">"font-weight: bold; font-size: 72px; text-align:center"</span></span>
 <span id="cb4-8"><a href="#cb4-8" tabindex="-1"></a>    ),</span>
 <span id="cb4-9"><a href="#cb4-9" tabindex="-1"></a>    shinyMobile<span class="sc">::</span><span class="fu">f7Block</span>(</span>

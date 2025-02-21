@@ -7,7 +7,7 @@
 
     <a class="navbar-brand me-2" href="../index.html">shinyTimer</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.0.0.9012</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.0.0.9013</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -40,9 +40,10 @@
     <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">shinyTimer</span><span class="op">(</span></span>
 <span>  <span class="va">inputId</span>,</span>
 <span>  label <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  hours <span class="op">=</span> <span class="fl">0</span>,</span>
 <span>  minutes <span class="op">=</span> <span class="fl">0</span>,</span>
 <span>  seconds <span class="op">=</span> <span class="fl">0</span>,</span>
-<span>  format <span class="op">=</span> <span class="st">"simple"</span>,</span>
+<span>  type <span class="op">=</span> <span class="st">"simple"</span>,</span>
 <span>  <span class="va">...</span></span>
 <span><span class="op">)</span></span></code></pre></div>
     </div>
@@ -59,6 +60,10 @@
 <dd><p>The label to display above the countdown.</p></dd>
 
 
+<dt id="arg-hours">hours<a class="anchor" aria-label="anchor" href="#arg-hours"></a></dt>
+<dd><p>An integer, the starting time in hours for the countdown.</p></dd>
+
+
 <dt id="arg-minutes">minutes<a class="anchor" aria-label="anchor" href="#arg-minutes"></a></dt>
 <dd><p>An integer, the starting time in minutes for the countdown.</p></dd>
 
@@ -67,8 +72,8 @@
 <dd><p>An integer, the starting time in seconds for the countdown.</p></dd>
 
 
-<dt id="arg-format">format<a class="anchor" aria-label="anchor" href="#arg-format"></a></dt>
-<dd><p>The format of the countdown timer display ("simple", "clock", or "stopwatch").</p></dd>
+<dt id="arg-type">type<a class="anchor" aria-label="anchor" href="#arg-type"></a></dt>
+<dd><p>The type of the countdown timer display ("simple", "mm:ss", "hh:mm:ss", "mm:ss.cs").</p></dd>
 
 
 <dt id="arg--">...<a class="anchor" aria-label="anchor" href="#arg--"></a></dt>
