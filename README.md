@@ -40,7 +40,7 @@ Try it out:
         shinyTimer::shinyTimer(
           inputId = "shiny_timer",
           seconds = 10L, 
-          format = "simple", 
+          type = "simple", 
           style = "font-weight: bold; font-size: 72px; text-align:center"
         )
       )
@@ -54,20 +54,21 @@ Try it out:
 
     shinyApp(ui, server)
 
-`shinyTimer()` is by default formatted as `simple` one, but you can
-switch `format` to a `clock` or a `stopwatch` (with `centiseconds`).
+`shinyTimer()` is by default a `simple` one, but you can switch to clock
+types by passing `mm:ss`, `hh:mm:ss` or `mm:ss.cs` (with `centiseconds`)
+to `type` parameter.
 
 <div style="text-align: center;">
 
-<img src="man/figures/shiny_timer_format.gif" alt=""/>
+<img src="man/figures/shiny_timer_type.gif" alt=""/>
 
 </div>
 
-You can either set only `seconds`, `minutes` or both.
+You can either set `seconds`, `minutes` or `hours`.
 
 <div style="text-align: center;">
 
-<img src="man/figures/shiny_timer_set_minutes.gif" alt=""/>
+<img src="man/figures/shiny_timer_set.gif" alt=""/>
 
 </div>
 
@@ -87,7 +88,7 @@ Once the timer reaches `0` JavaScript sends `timer_done` value to Shiny
         shinyTimer::shinyTimer(
           inputId = "shiny_timer",
           seconds = 10L, 
-          format = "simple", 
+          type = "simple", 
           style = "font-weight: bold; font-size: 72px; text-align:center"
         ),
         shinyMobile::f7Button(
@@ -134,7 +135,7 @@ You can also use `shinyTimer` as a stopwatch. Simply trigger
         shinyTimer::shinyTimer(
           inputId = "shiny_timer",
           seconds = 0L, 
-          format = "clock", 
+          type = "mm:ss.cs", 
           style = "font-weight: bold; font-size: 72px; text-align:center"
         ),
         shinyMobile::f7Block(
