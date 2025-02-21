@@ -5,13 +5,13 @@ ui <- shinyMobile::f7Page(
     shinyTimer(
       inputId = "shiny_timer",
       seconds = 10L, 
-      format = "simple", 
+      type = "simple", 
       style = "font-weight: bold; font-size: 72px; text-align:center"
     ),
     shinyMobile::f7Select(
-      inputId = "timer_format",
+      inputId = "timer_type",
       label = NULL,
-      choices = c("simple", "clock", "stopwatch")
+      choices = c("simple", "mm:ss", "hh:mm:ss", "mm:ss.cs")
     ),
     shiny::br(),
     shinyMobile::f7Button(
@@ -31,13 +31,13 @@ server <- function(input, output, session) {
   shiny::observeEvent(input$start_timer, {
     countDown(session, "shiny_timer")
   })
-  shiny::observeEvent(input$timer_format, {
+  shiny::observeEvent(input$timer_type, {
     updateShinyTimer(
       session = session,
       inputId = "shiny_timer",
-      format = input$timer_format
+      type = input$timer_type
     )
   })
 }
 
-shinyApp(ui, server)
+shiny::shinyApp(ui, server)

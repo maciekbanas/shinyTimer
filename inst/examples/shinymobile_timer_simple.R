@@ -5,7 +5,7 @@ ui <- shinyMobile::f7Page(
     shinyTimer(
       inputId = "shiny_timer",
       seconds = 10L, 
-      format = "simple", 
+      type = "simple", 
       style = "font-weight: bold; font-size: 72px; text-align:center"
     )
   )

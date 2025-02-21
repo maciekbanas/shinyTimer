@@ -4,8 +4,15 @@ ui <- shinyMobile::f7Page(
   shinyMobile::f7Card(
     shinyTimer(
       inputId = "shiny_timer",
-      format = "clock", 
+      type = "hh:mm:ss", 
       style = "font-weight: bold; font-size: 72px; text-align:center"
+    ),
+    shinyMobile::f7Slider(
+      inputId = "hours_slider",
+      label = "Hours",
+      value = 0,
+      min = 0,
+      max = 24
     ),
     shinyMobile::f7Slider(
       inputId = "minutes_slider",
@@ -36,17 +43,20 @@ ui <- shinyMobile::f7Page(
 )
 
 server <- function(input, output, session) {
-  shiny::observeEvent(c(input$seconds_slider, input$minutes_slider), {
+  shiny::observe({
     updateShinyTimer(
       session = session,
       inputId = "shiny_timer",
+      hours = input$hours_slider,
+      minutes = input$minutes_slider,
       seconds = input$seconds_slider,
-      minutes = input$minutes_slider
+      type = "hh:mm:ss"
     )
   })
+  
   shiny::observeEvent(input$start_timer, {
     countDown(session, "shiny_timer")
   })
 }
 
-shinyApp(ui, server)
+shiny::shinyApp(ui, server)
