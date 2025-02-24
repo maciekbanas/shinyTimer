@@ -81,7 +81,13 @@ Shiny.addCustomMessageHandler('updateShinyTimer', function(message) {
   }
 
   if (background !== undefined) {
-    countdownElement.className = `shiny-timer ${background === 'circle' ? 'shiny-timer-circle' : background === 'rectangle' ? 'shiny-timer-rectangle' : ''}`;
+    const backgroundClass = background === 'circle' ? 'shiny-timer-circle' :
+                            background === 'rectangle' ? 'shiny-timer-rectangle' : '';
+    countdownElement.className = `shiny-timer ${backgroundClass}`;
+  }
+
+  if (style !== undefined) {
+    countdownElement.style.cssText = style;
   }
 
   if (label !== undefined && labelElement) {
