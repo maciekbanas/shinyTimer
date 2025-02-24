@@ -2,11 +2,15 @@ devtools::load_all()
 
 ui <- shinyMobile::f7Page(
   shinyMobile::f7Card(
-    shinyTimer(
-      inputId = "shiny_timer",
-      seconds = 10L, 
-      type = "simple", 
-      style = "font-weight: bold; font-size: 72px; text-align:center"
+    htmltools::div(
+      style = "display:flex; justify-content:center;",
+      shinyTimer(
+        inputId = "shiny_timer",
+        seconds = 10L, 
+        type = "simple", 
+        background = "circle",
+        style = "font-weight: bold; font-size: 72px;"
+      )
     )
   )
 )

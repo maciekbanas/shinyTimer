@@ -22,7 +22,7 @@ knitr::opts_chunk$set(
  In examples below I make use of [shinyMobile](https://github.com/RinteRface/shinyMobile/) framework.
 
 <div style="text-align: center;">
-  <img src="man/figures/shiny_timer.gif" alt=""/>
+  <img src="man/figures/shiny_timer_simple.gif" alt=""/>
 </div>
 
 ## Install
