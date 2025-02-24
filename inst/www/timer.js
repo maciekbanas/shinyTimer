@@ -1,4 +1,6 @@
 let timerInterval;
+let pausedTime;
+let timerDirection;
 
 function formatTime(time, type) {
   if (type === 'mm:ss') {
@@ -20,44 +22,58 @@ function formatTime(time, type) {
   }
 }
 
-Shiny.addCustomMessageHandler('countDown', function(message) {
-  const { inputId } = message;
-  clearInterval(timerInterval);
-  const countdownElement = document.getElementById(inputId);
-  let timeLeft = parseFloat(countdownElement.getAttribute('data-start-time'));
-  const type = countdownElement.getAttribute('data-type');
+function startTimer(inputId) {
+  const timerElement = document.getElementById(inputId);
+  let time = pausedTime !== undefined ? pausedTime : parseFloat(timerElement.getAttribute('data-start-time'));
+  const type = timerElement.getAttribute('data-type');
 
-  countdownElement.textContent = formatTime(timeLeft, type);
+  clearInterval(timerInterval);
+  timerElement.textContent = formatTime(time, type);
 
   timerInterval = setInterval(function() {
-    if (timeLeft <= 0) {
-      clearInterval(timerInterval);
-      countdownElement.textContent = formatTime(0, type);
-      Shiny.setInputValue('timer_done', true);
-    } else {
-      timeLeft = Math.max(timeLeft - 0.01, 0); // Update to prevent negative time display
-      countdownElement.textContent = formatTime(timeLeft, type);
+    if (timerDirection === 'down') {
+      if (time <= 0) {
+        clearInterval(timerInterval);
+        timerElement.textContent = formatTime(0, type);
+        pausedTime = 0;
+        Shiny.setInputValue('timer_done', true);
+      } else {
+        time = Math.max(time - 0.01, 0);
+        pausedTime = time;
+        timerElement.textContent = formatTime(time, type);
+      }
+    } else if (timerDirection === 'up') {
+      time += 0.01;
+      pausedTime = time;
+      timerElement.textContent = formatTime(time, type);
     }
   }, 10);
+}
+
+Shiny.addCustomMessageHandler('countDown', function(message) {
+  const { inputId } = message;
+  timerDirection = 'down';
+  startTimer(inputId);
 });
 
 Shiny.addCustomMessageHandler('countUp', function(message) {
   const { inputId } = message;
-  clearInterval(timerInterval);
-  const countElement = document.getElementById(inputId);
-  let timeStart = parseFloat(countElement.getAttribute('data-start-time'));
-  const type = countElement.getAttribute('data-type');
-
-  countElement.textContent = formatTime(timeStart, type);
-
-  timerInterval = setInterval(function() {
-    timeStart += 0.01;
-    countElement.textContent = formatTime(timeStart, type);
-  }, 10);
+  timerDirection = 'up';
+  startTimer(inputId);
 });
 
-Shiny.addCustomMessageHandler('stopTimer', function(message) {
+Shiny.addCustomMessageHandler('pauseTimer', function(message) {
   clearInterval(timerInterval);
+});
+
+Shiny.addCustomMessageHandler('resetTimer', function(message) {
+  const { inputId, start } = message;
+  clearInterval(timerInterval);
+  const timerElement = document.getElementById(inputId);
+  timerElement.setAttribute('data-start-time', start);
+  pausedTime = start;
+  const type = timerElement.getAttribute('data-type');
+  timerElement.textContent = formatTime(start, type);
 });
 
 Shiny.addCustomMessageHandler('updateShinyTimer', function(message) {
@@ -74,11 +90,16 @@ Shiny.addCustomMessageHandler('updateShinyTimer', function(message) {
 
   if (start !== undefined) {
     countdownElement.setAttribute('data-start-time', start);
+    pausedTime = start;
+  } else {
+    pausedTime = parseFloat(countdownElement.getAttribute('data-start-time'));
   }
 
   if (type !== undefined) {
     countdownElement.setAttribute('data-type', type);
   }
+
+  countdownElement.textContent = formatTime(pausedTime, countdownElement.getAttribute('data-type'));
 
   if (background !== undefined) {
     const backgroundClass = background === 'circle' ? 'shiny-timer-circle' :
@@ -86,15 +107,7 @@ Shiny.addCustomMessageHandler('updateShinyTimer', function(message) {
     countdownElement.className = `shiny-timer ${backgroundClass}`;
   }
 
-  if (style !== undefined) {
-    countdownElement.style.cssText = style;
-  }
-
   if (label !== undefined && labelElement) {
     labelElement.textContent = label;
   }
-
-  const currentStartTime = parseFloat(countdownElement.getAttribute('data-start-time'));
-  const currentType = countdownElement.getAttribute('data-type');
-  countdownElement.textContent = formatTime(currentStartTime, currentType);
 });

@@ -2,7 +2,7 @@
 % Please edit documentation in R/timer.R
 \name{shinyTimer}
 \alias{shinyTimer}
-\title{\code{shinyTimer} widget}
+\title{shinyTimer widget}
 \usage{
 shinyTimer(
   inputId,
@@ -36,5 +36,5 @@ shinyTimer(
 A shiny UI component for the countdown timer.
 }
 \description{
-\code{shinyTimer} widget
+shinyTimer widget
 }

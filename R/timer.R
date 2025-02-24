@@ -1,4 +1,4 @@
-#' `shinyTimer` widget
+#' shinyTimer widget
 #'
 #' @param inputId The input id.
 #' @param label The label to display above the countdown.
@@ -72,7 +72,7 @@ shinyTimer <- function(inputId, label = NULL, hours = 0, minutes = 0, seconds = 
   )
 }
 
-#' Update `shinyTimer` widget
+#' Update shinyTimer widget
 #'
 #' @param session The session object from the shiny server function.
 #' @param inputId The input ID corresponding to the UI element.
@@ -102,7 +102,7 @@ updateShinyTimer <- function(session, inputId, hours = NULL, minutes = NULL, sec
   session$sendCustomMessage('updateShinyTimer', message)
 }
 
-#' Set `shinyTimer` in motion: count down
+#' Set shinyTimer in motion: count down
 #'
 #' @param session The session object from the shiny server function.
 #' @param inputId The input ID corresponding to the UI element.
@@ -112,7 +112,7 @@ countDown <- function(session, inputId) {
   session$sendCustomMessage('countDown', list(inputId = inputId))
 }
 
-#' Set `shinyTimer` in motion: count up
+#' Set shinyTimer in motion: count up
 #'
 #' @param session The session object from the shiny server function.
 #' @param inputId The input ID corresponding to the UI element.
@@ -122,12 +122,26 @@ countUp <- function(session, inputId) {
   session$sendCustomMessage('countUp', list(inputId = inputId))
 }
 
-#' Stop `shinyTimer`
+#' Pause shinyTimer
 #'
 #' @param session The session object from the shiny server function.
 #' @param inputId The input ID corresponding to the UI element.
 #'
 #' @export
-stopTimer <- function(session, inputId) {
-  session$sendCustomMessage('stopTimer', list(inputId = inputId))
+pauseTimer <- function(session, inputId) {
+  session$sendCustomMessage('pauseTimer', list(inputId = inputId))
+}
+
+#' Reset shinyTimer
+#'
+#' @param session The session object from the shiny server function.
+#' @param inputId The input ID corresponding to the UI element.
+#' @param hours The new reset time in hours.
+#' @param minutes The new reset time in minutes.
+#' @param seconds The new reset time in seconds.
+#'
+#' @export
+resetTimer <- function(session, inputId, hours = 0, minutes = 0, seconds = 0) {
+  total_seconds <- (hours * 3600) + (minutes * 60) + seconds
+  session$sendCustomMessage('resetTimer', list(inputId = inputId, start = total_seconds))
 }

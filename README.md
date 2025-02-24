@@ -122,11 +122,12 @@ Once the timer reaches `0` JavaScript sends `timer_done` value to Shiny
 ## Stopwatch
 
 You can also use `shinyTimer` as a stopwatch. Simply trigger
-`shinyTimer` in your `server` with `countUp()`:
+`shinyTimer` in your `server` with `countUp()`. You can also
+`pauseTimer()` and `resetTimer()`.
 
 <div style="text-align: center;">
 
-<img src="man/figures/shiny_timer_up.gif" alt=""/>
+<img src="man/figures/shiny_timer_stopwatch.gif" alt=""/>
 
 </div>
 
@@ -138,10 +139,11 @@ You can also use `shinyTimer` as a stopwatch. Simply trigger
           type = "mm:ss.cs", 
           style = "font-weight: bold; font-size: 72px; text-align:center"
         ),
+        shiny::br(),
         shinyMobile::f7Block(
           shinyMobile::f7Button(
             "start_timer",
-            label = "Start", 
+            label = "Run", 
             size = "large",
             rounded = TRUE,
             color = "green"
@@ -150,11 +152,21 @@ You can also use `shinyTimer` as a stopwatch. Simply trigger
               style="font-size:20px;"
             ),
           shinyMobile::f7Button(
-            "stop_timer",
-            label = "Stop", 
+            "pause_timer",
+            label = "Pause", 
             size = "large",
             rounded = TRUE,
             color = "orange"
+          ) |>
+            htmltools::tagAppendAttributes(
+              style="font-size:20px;"
+            ),
+          shinyMobile::f7Button(
+            "resume_timer",
+            label = "Reset", 
+            size = "large",
+            rounded = TRUE,
+            color = "blue"
           ) |>
             htmltools::tagAppendAttributes(
               style="font-size:20px;"
@@ -168,8 +180,11 @@ You can also use `shinyTimer` as a stopwatch. Simply trigger
       shiny::observeEvent(input$start_timer, {
         shinyTimer::countUp(session, "shiny_timer")
       })
-      shiny::observeEvent(input$stop_timer, {
-        shinyTimer::stopTimer(session, "shiny_timer")
+      shiny::observeEvent(input$pause_timer, {
+        shinyTimer::pauseTimer(session, "shiny_timer")
+      })
+      shiny::observeEvent(input$resume_timer, {
+        shinyTimer::resetTimer(session, "shiny_timer")
       })
     }
 
