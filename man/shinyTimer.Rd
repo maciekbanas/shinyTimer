@@ -11,6 +11,7 @@ shinyTimer(
   minutes = 0,
   seconds = 0,
   type = "simple",
+  background = "none",
   ...
 )
 }
@@ -26,6 +27,8 @@ shinyTimer(
 \item{seconds}{An integer, the starting time in seconds for the countdown.}
 
 \item{type}{The type of the countdown timer display ("simple", "mm:ss", "hh:mm:ss", "mm:ss.cs").}
+
+\item{background}{The shape of the timer's container ("none", "circle", "rectangle").}
 
 \item{...}{Any additional parameters you want to pass to the placeholder for the timer (\code{htmltools::tags$div}).}
 }
