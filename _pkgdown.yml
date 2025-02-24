@@ -15,4 +15,5 @@ reference:
   contents:
   - '`countDown`'
   - '`countUp`'
-  - '`stopTimer`'
+  - '`pauseTimer`'
+  - '`resetTimer`'

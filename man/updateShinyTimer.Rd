@@ -2,7 +2,7 @@
 % Please edit documentation in R/timer.R
 \name{updateShinyTimer}
 \alias{updateShinyTimer}
-\title{Update \code{shinyTimer} widget}
+\title{Update shinyTimer widget}
 \usage{
 updateShinyTimer(
   session,
@@ -33,5 +33,5 @@ updateShinyTimer(
 \item{background}{The new shape of the timer's container ("none", "circle", "rectangle").}
 }
 \description{
-Update \code{shinyTimer} widget
+Update shinyTimer widget
 }

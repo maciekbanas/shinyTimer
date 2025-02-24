@@ -2,7 +2,7 @@
 % Please edit documentation in R/timer.R
 \name{countUp}
 \alias{countUp}
-\title{Set \code{shinyTimer} in motion: count up}
+\title{Set shinyTimer in motion: count up}
 \usage{
 countUp(session, inputId)
 }
@@ -12,5 +12,5 @@ countUp(session, inputId)
 \item{inputId}{The input ID corresponding to the UI element.}
 }
 \description{
-Set \code{shinyTimer} in motion: count up
+Set shinyTimer in motion: count up
 }

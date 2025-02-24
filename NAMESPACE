@@ -2,6 +2,7 @@
 
 export(countDown)
 export(countUp)
+export(pauseTimer)
+export(resetTimer)
 export(shinyTimer)
-export(stopTimer)
 export(updateShinyTimer)
