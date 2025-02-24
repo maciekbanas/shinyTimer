@@ -35,7 +35,7 @@ Shiny.addCustomMessageHandler('countDown', function(message) {
       countdownElement.textContent = formatTime(0, type);
       Shiny.setInputValue('timer_done', true);
     } else {
-      timeLeft -= 0.01;
+      timeLeft = Math.max(timeLeft - 0.01, 0); // Update to prevent negative time display
       countdownElement.textContent = formatTime(timeLeft, type);
     }
   }, 10);
