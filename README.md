@@ -17,7 +17,7 @@ In examples below I make use of
 
 <div style="text-align: center;">
 
-<img src="man/figures/shiny_timer.gif" alt=""/>
+<img src="man/figures/shiny_timer_simple.gif" alt=""/>
 
 </div>
 

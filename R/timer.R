@@ -6,15 +6,20 @@
 #' @param minutes An integer, the starting time in minutes for the countdown.
 #' @param seconds An integer, the starting time in seconds for the countdown.
 #' @param type The type of the countdown timer display ("simple", "mm:ss", "hh:mm:ss", "mm:ss.cs").
+#' @param background The shape of the timer's container ("none", "circle", "rectangle").
 #' @param ... Any additional parameters you want to pass to the placeholder for the timer (`htmltools::tags$div`).
 #'
 #' @return A shiny UI component for the countdown timer.
 #' @export
-shinyTimer <- function(inputId, label = NULL, hours = 0, minutes = 0, seconds = 0, type = "simple", ...) {
+shinyTimer <- function(inputId, label = NULL, hours = 0, minutes = 0, seconds = 0, type = "simple", background = "none", ...) {
   shiny::addResourcePath("shinyTimer", system.file("www", package = "shinyTimer"))
   
   if (!type %in% c("simple", "mm:ss", "hh:mm:ss", "mm:ss.cs")) {
     stop("Invalid type. Choose 'simple', 'mm:ss', 'hh:mm:ss', or 'mm:ss.cs'.")
+  }
+  
+  if (!background %in% c("none", "circle", "rectangle")) {
+    stop("Invalid background. Choose 'none', 'circle', or 'rectangle'.")
   }
   
   totalseconds <- (hours * 3600) + (minutes * 60) + seconds
@@ -27,17 +32,43 @@ shinyTimer <- function(inputId, label = NULL, hours = 0, minutes = 0, seconds = 
     "mm:ss.cs" = sprintf("%02d:%02d.%02d", floor(totalseconds / 60), floor(totalseconds %% 60), 0)
   )
   
+  background_class <- switch(
+    background,
+    "circle" = "shiny-timer-circle",
+    "rectangle" = "shiny-timer-rectangle",
+    "none" = ""
+  )
+  
   shiny::tagList(
     if (!is.null(label)) htmltools::tags$label(label, `for` = inputId),
     htmltools::tags$div(
       id = inputId,
-      class = "shiny-timer",
+      class = paste("shiny-timer", background_class),
       `data-start-time` = totalseconds,
       `data-type` = type,
       initial_display,
       ...
     ),
-    htmltools::tags$script(src = "shinyTimer/timer.js")
+    htmltools::tags$script(src = "shinyTimer/timer.js"),
+    htmltools::tags$style(HTML("
+      .shiny-timer-circle {
+        border: 3px solid #ccc;
+        border-radius: 50%;
+        width: 150px;
+        height: 150px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+      .shiny-timer-rectangle {
+        border: 3px solid #ccc;
+        width: 150px;
+        height: 100px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+    "))
   )
 }
 
@@ -50,9 +81,10 @@ shinyTimer <- function(inputId, label = NULL, hours = 0, minutes = 0, seconds = 
 #' @param seconds The new starting time in seconds for the countdown.
 #' @param type The new type of the countdown timer display ("simple", "mm:ss", "hh:mm:ss", "mm:ss.cs").
 #' @param label The new label to be displayed above the countdown timer.
+#' @param background The new shape of the timer's container ("none", "circle", "rectangle").
 #'
 #' @export
-updateShinyTimer <- function(session, inputId, hours = NULL, minutes = NULL, seconds = NULL, type = NULL, label = NULL) {
+updateShinyTimer <- function(session, inputId, hours = NULL, minutes = NULL, seconds = NULL, type = NULL, label = NULL, background = NULL) {
   message <- list(inputId = inputId)
   
   if (!is.null(hours) || !is.null(minutes) || !is.null(seconds)) {
@@ -65,6 +97,7 @@ updateShinyTimer <- function(session, inputId, hours = NULL, minutes = NULL, sec
   
   if (!is.null(type)) message$type <- type
   if (!is.null(label)) message$label <- label
+  if (!is.null(background)) message$background <- background
   
   session$sendCustomMessage('updateShinyTimer', message)
 }

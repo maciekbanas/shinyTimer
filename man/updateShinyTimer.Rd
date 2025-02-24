@@ -11,7 +11,8 @@ updateShinyTimer(
   minutes = NULL,
   seconds = NULL,
   type = NULL,
-  label = NULL
+  label = NULL,
+  background = NULL
 )
 }
 \arguments{
@@ -28,6 +29,8 @@ updateShinyTimer(
 \item{type}{The new type of the countdown timer display ("simple", "mm:ss", "hh:mm:ss", "mm:ss.cs").}
 
 \item{label}{The new label to be displayed above the countdown timer.}
+
+\item{background}{The new shape of the timer's container ("none", "circle", "rectangle").}
 }
 \description{
 Update \code{shinyTimer} widget

@@ -61,7 +61,7 @@ Shiny.addCustomMessageHandler('stopTimer', function(message) {
 });
 
 Shiny.addCustomMessageHandler('updateShinyTimer', function(message) {
-  const { inputId, start, type, label } = message;
+  const { inputId, start, type, label, background } = message;
   const countdownElement = document.getElementById(inputId);
   const labelElement = document.querySelector(`label[for=${inputId}]`);
 
@@ -80,10 +80,15 @@ Shiny.addCustomMessageHandler('updateShinyTimer', function(message) {
     countdownElement.setAttribute('data-type', type);
   }
 
+  if (background !== undefined) {
+    countdownElement.className = `shiny-timer ${background === 'circle' ? 'shiny-timer-circle' : background === 'rectangle' ? 'shiny-timer-rectangle' : ''}`;
+  }
+
   if (label !== undefined && labelElement) {
     labelElement.textContent = label;
   }
 
   const currentStartTime = parseFloat(countdownElement.getAttribute('data-start-time'));
-  countdownElement.textContent = formatTime(currentStartTime, type);
+  const currentType = countdownElement.getAttribute('data-type');
+  countdownElement.textContent = formatTime(currentStartTime, currentType);
 });
