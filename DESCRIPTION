@@ -1,9 +1,9 @@
 Package: shinyTimer
-Title: Countdown Timer for Shiny
+Title: Customizable Timer for Shiny Applications
 Version: 0.1.0
 Authors@R: 
     person("Maciej", "Banas", email = "banasmaciek@gmail.com", role = c("aut", "cre"))
-Description: Provides a customizable countdown timer widget for Shiny applications.
+Description: Provides a customizable timer widget for Shiny applications. Features include countdown and count-up modes, setting different timer formats, pausing and resetting.
 Depends: R (>= 4.1.0)
 License: MIT + file LICENSE
 Encoding: UTF-8
