@@ -4,12 +4,12 @@
 \alias{countDown}
 \title{Set shinyTimer in motion: count down}
 \usage{
-countDown(session, inputId)
+countDown(inputId, session = shiny::getDefaultReactiveDomain())
 }
 \arguments{
-\item{session}{The session object from the shiny server function.}
-
 \item{inputId}{The input ID corresponding to the UI element.}
+
+\item{session}{The session object from the shiny server function.}
 }
 \description{
 Set shinyTimer in motion: count down

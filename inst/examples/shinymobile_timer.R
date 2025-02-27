@@ -6,7 +6,7 @@ ui <- shinyMobile::f7Page(
       inputId = "shiny_timer",
       seconds = 10L, 
       type = "simple",
-      style = "font-weight: bold; font-size: 72px"
+      style = "font-weight: bold; font-size: 72px; text-align: center;"
     ),
     shinyMobile::f7Button(
       "start_timer",
@@ -23,7 +23,9 @@ ui <- shinyMobile::f7Page(
 
 server <- function(input, output, session) {
   shiny::observeEvent(input$start_timer, {
-    countDown(session, "shiny_timer")
+    countDown(
+      inputId = "shiny_timer"
+    )
   })
 }
 

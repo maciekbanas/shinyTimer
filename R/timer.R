@@ -74,7 +74,6 @@ shinyTimer <- function(inputId, label = NULL, hours = 0, minutes = 0, seconds = 
 
 #' Update shinyTimer widget
 #'
-#' @param session The session object from the shiny server function.
 #' @param inputId The input ID corresponding to the UI element.
 #' @param hours The new starting time in hours for the countdown.
 #' @param minutes The new starting time in minutes for the countdown.
@@ -82,9 +81,12 @@ shinyTimer <- function(inputId, label = NULL, hours = 0, minutes = 0, seconds = 
 #' @param type The new type of the countdown timer display ("simple", "mm:ss", "hh:mm:ss", "mm:ss.cs").
 #' @param label The new label to be displayed above the countdown timer.
 #' @param background The new shape of the timer's container ("none", "circle", "rectangle").
+#' @param session The session object from the shiny server function.
 #'
 #' @export
-updateShinyTimer <- function(session, inputId, hours = NULL, minutes = NULL, seconds = NULL, type = NULL, label = NULL, background = NULL) {
+updateShinyTimer <- function(inputId, hours = NULL, minutes = NULL, seconds = NULL, 
+                             type = NULL, label = NULL, background = NULL, 
+                             session = shiny::getDefaultReactiveDomain()) {
   message <- list(inputId = inputId)
   
   if (!is.null(hours) || !is.null(minutes) || !is.null(seconds)) {
@@ -104,44 +106,41 @@ updateShinyTimer <- function(session, inputId, hours = NULL, minutes = NULL, sec
 
 #' Set shinyTimer in motion: count down
 #'
-#' @param session The session object from the shiny server function.
 #' @param inputId The input ID corresponding to the UI element.
+#' @param session The session object from the shiny server function.
 #'
 #' @export
-countDown <- function(session, inputId) {
+countDown <- function(inputId, session = shiny::getDefaultReactiveDomain()) {
   session$sendCustomMessage('countDown', list(inputId = inputId))
 }
 
 #' Set shinyTimer in motion: count up
 #'
-#' @param session The session object from the shiny server function.
-#' @param inputId The input ID corresponding to the UI element.
+#' @inheritParams countDown
 #'
 #' @export
-countUp <- function(session, inputId) {
+countUp <- function(inputId, session = shiny::getDefaultReactiveDomain()) {
   session$sendCustomMessage('countUp', list(inputId = inputId))
 }
 
 #' Pause shinyTimer
 #'
-#' @param session The session object from the shiny server function.
-#' @param inputId The input ID corresponding to the UI element.
+#' @inheritParams countDown
 #'
 #' @export
-pauseTimer <- function(session, inputId) {
+pauseTimer <- function(inputId, session = shiny::getDefaultReactiveDomain()) {
   session$sendCustomMessage('pauseTimer', list(inputId = inputId))
 }
 
 #' Reset shinyTimer
 #'
-#' @param session The session object from the shiny server function.
-#' @param inputId The input ID corresponding to the UI element.
+#' @inheritParams countDown
 #' @param hours The new reset time in hours.
 #' @param minutes The new reset time in minutes.
 #' @param seconds The new reset time in seconds.
 #'
 #' @export
-resetTimer <- function(session, inputId, hours = 0, minutes = 0, seconds = 0) {
+resetTimer <- function(inputId, hours = 0, minutes = 0, seconds = 0, session = shiny::getDefaultReactiveDomain()) {
   total_seconds <- (hours * 3600) + (minutes * 60) + seconds
   session$sendCustomMessage('resetTimer', list(inputId = inputId, start = total_seconds))
 }
