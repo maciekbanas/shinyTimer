@@ -12,3 +12,6 @@ RoxygenNote: 7.3.1
 Imports:
   shiny,
   htmltools
+Suggests:
+  R6,
+  testthat (>= 3.0.0)
