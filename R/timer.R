@@ -50,7 +50,7 @@ shinyTimer <- function(inputId, label = NULL, hours = 0, minutes = 0, seconds = 
       ...
     ),
     htmltools::tags$script(src = "shinyTimer/timer.js"),
-    htmltools::tags$style(HTML("
+    htmltools::tags$style(shiny::HTML("
       .shiny-timer-circle {
         border: 3px solid #ccc;
         border-radius: 50%;
