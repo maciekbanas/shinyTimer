@@ -34,7 +34,8 @@ test_that("shinyTimer function works correctly", {
 
 test_that("updateShinyTimer function works correctly", {
   session <- MockShinySession$new()
-  updateShinyTimer(session, "timer1", hours = 1, minutes = 30, seconds = 45, type = "hh:mm:ss", label = "Updated Timer", background = "rectangle")
+  updateShinyTimer("timer1", hours = 1, minutes = 30, seconds = 45, type = "hh:mm:ss", label = "Updated Timer", 
+                   background = "rectangle", session = session)
   message <- session$getLastCustomMessage("updateShinyTimer")
   expect_true(!is.null(message))
   expect_equal(message$inputId, "timer1")
@@ -46,7 +47,7 @@ test_that("updateShinyTimer function works correctly", {
 
 test_that("countDown function works correctly", {
   session <- MockShinySession$new()
-  countDown(session, "timer1")
+  countDown("timer1", session = session)
   message <- session$getLastCustomMessage("countDown")
   expect_true(!is.null(message))
   expect_equal(message$inputId, "timer1")
@@ -54,7 +55,7 @@ test_that("countDown function works correctly", {
 
 test_that("countUp function works correctly", {
   session <- MockShinySession$new()
-  countUp(session, "timer1")
+  countUp("timer1", session = session)
   message <- session$getLastCustomMessage("countUp")
   expect_true(!is.null(message))
   expect_equal(message$inputId, "timer1")
@@ -62,7 +63,7 @@ test_that("countUp function works correctly", {
 
 test_that("pauseTimer function works correctly", {
   session <- MockShinySession$new()
-  pauseTimer(session, "timer1")
+  pauseTimer("timer1", session = session)
   message <- session$getLastCustomMessage("pauseTimer")
   expect_true(!is.null(message))
   expect_equal(message$inputId, "timer1")
@@ -70,7 +71,7 @@ test_that("pauseTimer function works correctly", {
 
 test_that("resetTimer function works correctly", {
   session <- MockShinySession$new()
-  resetTimer(session, "timer1", hours = 1, minutes = 30, seconds = 45)
+  resetTimer("timer1", hours = 1, minutes = 30, seconds = 45, session = session)
   message <- session$getLastCustomMessage("resetTimer")
   expect_true(!is.null(message))
   expect_equal(message$inputId, "timer1")
