@@ -5,19 +5,17 @@
 \title{Update shinyTimer widget}
 \usage{
 updateShinyTimer(
-  session,
   inputId,
   hours = NULL,
   minutes = NULL,
   seconds = NULL,
   type = NULL,
   label = NULL,
-  background = NULL
+  background = NULL,
+  session = shiny::getDefaultReactiveDomain()
 )
 }
 \arguments{
-\item{session}{The session object from the shiny server function.}
-
 \item{inputId}{The input ID corresponding to the UI element.}
 
 \item{hours}{The new starting time in hours for the countdown.}
@@ -31,6 +29,8 @@ updateShinyTimer(
 \item{label}{The new label to be displayed above the countdown timer.}
 
 \item{background}{The new shape of the timer's container ("none", "circle", "rectangle").}
+
+\item{session}{The session object from the shiny server function.}
 }
 \description{
 Update shinyTimer widget

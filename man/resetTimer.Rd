@@ -4,11 +4,15 @@
 \alias{resetTimer}
 \title{Reset shinyTimer}
 \usage{
-resetTimer(session, inputId, hours = 0, minutes = 0, seconds = 0)
+resetTimer(
+  inputId,
+  hours = 0,
+  minutes = 0,
+  seconds = 0,
+  session = shiny::getDefaultReactiveDomain()
+)
 }
 \arguments{
-\item{session}{The session object from the shiny server function.}
-
 \item{inputId}{The input ID corresponding to the UI element.}
 
 \item{hours}{The new reset time in hours.}
@@ -16,6 +20,8 @@ resetTimer(session, inputId, hours = 0, minutes = 0, seconds = 0)
 \item{minutes}{The new reset time in minutes.}
 
 \item{seconds}{The new reset time in seconds.}
+
+\item{session}{The session object from the shiny server function.}
 }
 \description{
 Reset shinyTimer

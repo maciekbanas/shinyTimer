@@ -54,7 +54,9 @@ ui <- shinyMobile::f7Page(
 
 server <- function(input, output, session) {
   shiny::observe({
-    shinyTimer::countDown(session, "shiny_timer")
+    shinyTimer::countDown(
+      inputId = "shiny_timer"
+    )
   })
 }
 
@@ -99,14 +101,14 @@ ui <- shinyMobile::f7Page(
       color = "orange"
     ) |>
       htmltools::tagAppendAttributes(
-        style="font-size:20px;"
+        style = "font-size:20px;"
       )
   )
 )
 
 server <- function(input, output, session) {
   shiny::observeEvent(input$start_timer, {
-    shinyTimer::countDown(session, "shiny_timer")
+    shinyTimer::countDown("shiny_timer")
   })
   shiny::observeEvent(input$timer_done, {
     shinyMobile::f7Dialog(
@@ -147,7 +149,7 @@ ui <- shinyMobile::f7Page(
         color = "green"
       ) |>
         htmltools::tagAppendAttributes(
-          style="font-size:20px;"
+          style = "font-size:20px;"
         ),
       shinyMobile::f7Button(
         "pause_timer",
@@ -157,7 +159,7 @@ ui <- shinyMobile::f7Page(
         color = "orange"
       ) |>
         htmltools::tagAppendAttributes(
-          style="font-size:20px;"
+          style = "font-size:20px;"
         ),
       shinyMobile::f7Button(
         "resume_timer",
@@ -167,22 +169,21 @@ ui <- shinyMobile::f7Page(
         color = "blue"
       ) |>
         htmltools::tagAppendAttributes(
-          style="font-size:20px;"
+          style = "font-size:20px;"
         )
     )
-    
   )
 )
 
 server <- function(input, output, session) {
   shiny::observeEvent(input$start_timer, {
-    shinyTimer::countUp(session, "shiny_timer")
+    shinyTimer::countUp("shiny_timer")
   })
   shiny::observeEvent(input$pause_timer, {
-    shinyTimer::pauseTimer(session, "shiny_timer")
+    shinyTimer::pauseTimer("shiny_timer")
   })
   shiny::observeEvent(input$resume_timer, {
-    shinyTimer::resetTimer(session, "shiny_timer")
+    shinyTimer::resetTimer("shiny_timer")
   })
 }
 

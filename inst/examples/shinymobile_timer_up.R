@@ -47,13 +47,13 @@ ui <- shinyMobile::f7Page(
 
 server <- function(input, output, session) {
   shiny::observeEvent(input$start_timer, {
-    countUp(session, "shiny_timer")
+    countUp("shiny_timer")
   })
   shiny::observeEvent(input$pause_timer, {
-    pauseTimer(session, "shiny_timer")
+    pauseTimer("shiny_timer")
   })
   shiny::observeEvent(input$resume_timer, {
-    resetTimer(session, "shiny_timer")
+    resetTimer("shiny_timer")
   })
 }
 

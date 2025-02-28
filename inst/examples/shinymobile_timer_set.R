@@ -45,7 +45,6 @@ ui <- shinyMobile::f7Page(
 server <- function(input, output, session) {
   shiny::observe({
     updateShinyTimer(
-      session = session,
       inputId = "shiny_timer",
       hours = input$hours_slider,
       minutes = input$minutes_slider,
@@ -55,7 +54,7 @@ server <- function(input, output, session) {
   })
   
   shiny::observeEvent(input$start_timer, {
-    countDown(session, "shiny_timer")
+    countDown("shiny_timer")
   })
 }
 

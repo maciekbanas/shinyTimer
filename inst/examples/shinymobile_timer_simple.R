@@ -17,7 +17,7 @@ ui <- shinyMobile::f7Page(
 
 server <- function(input, output, session) {
   shiny::observe({
-    countDown(session, "shiny_timer")
+    countDown("shiny_timer")
   })
 }
 

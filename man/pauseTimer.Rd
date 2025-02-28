@@ -4,12 +4,12 @@
 \alias{pauseTimer}
 \title{Pause shinyTimer}
 \usage{
-pauseTimer(session, inputId)
+pauseTimer(inputId, session = shiny::getDefaultReactiveDomain())
 }
 \arguments{
-\item{session}{The session object from the shiny server function.}
-
 \item{inputId}{The input ID corresponding to the UI element.}
+
+\item{session}{The session object from the shiny server function.}
 }
 \description{
 Pause shinyTimer
