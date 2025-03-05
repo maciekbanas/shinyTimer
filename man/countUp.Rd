@@ -22,7 +22,7 @@ if (interactive()) {
   library(shiny)
   shinyApp(
     ui = fluidPage(
-      shinyTimer("timer", label = "Count Up Timer", seconds = 0, type = "mm:ss.cs", background = "rectangle"),
+      shinyTimer("timer", label = "Count Up Timer", seconds = 0, type = "mm:ss.cs"),
       actionButton("start", "Start Counting Up")
     ),
     server = function(input, output, session) {

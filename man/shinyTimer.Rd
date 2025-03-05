@@ -43,7 +43,7 @@ if (interactive()) {
   library(shiny)
   shinyApp(
     ui = fluidPage(
-      shinyTimer("timer", label = "Countdown Timer", seconds = 10, type = "mm:ss", background = "circle")
+      shinyTimer("timer", label = "Countdown Timer", seconds = 10)
     ),
     server = function(input, output, session) {
       observeEvent(input$start, {

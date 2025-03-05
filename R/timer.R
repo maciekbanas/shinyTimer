@@ -15,7 +15,7 @@
 #'   library(shiny)
 #'   shinyApp(
 #'     ui = fluidPage(
-#'       shinyTimer("timer", label = "Countdown Timer", seconds = 10, type = "mm:ss", background = "circle")
+#'       shinyTimer("timer", label = "Countdown Timer", seconds = 10)
 #'     ),
 #'     server = function(input, output, session) {
 #'       observeEvent(input$start, {
@@ -64,7 +64,7 @@ shinyTimer <- function(inputId, label = NULL, hours = 0, minutes = 0, seconds = 
       ...
     ),
     htmltools::tags$script(src = "shinyTimer/timer.js"),
-    htmltools::tags$style(HTML("
+    htmltools::tags$style(shiny::HTML("
       .shiny-timer-circle {
         border: 3px solid #ccc;
         border-radius: 50%;
@@ -92,7 +92,8 @@ shinyTimer <- function(inputId, label = NULL, hours = 0, minutes = 0, seconds = 
 #' @param hours The new starting time in hours for the countdown.
 #' @param minutes The new starting time in minutes for the countdown.
 #' @param seconds The new starting time in seconds for the countdown.
-#' @param type The new type of the countdown timer display ("simple", "mm:ss", "hh:mm:ss", "mm:ss.cs").
+#' @param type The new type of the countdown timer display ("simple", "mm:ss",
+#'   "hh:mm:ss", "mm:ss.cs").
 #' @param label The new label to be displayed above the countdown timer.
 #' @param background The new shape of the timer's container ("none", "circle", "rectangle").
 #' @param session The session object from the shiny server function.
@@ -103,7 +104,7 @@ shinyTimer <- function(inputId, label = NULL, hours = 0, minutes = 0, seconds = 
 #'   library(shiny)
 #'   shinyApp(
 #'     ui = fluidPage(
-#'       shinyTimer("timer", label = "Countdown Timer", seconds = 10, type = "mm:ss", background = "rectangle"),
+#'       shinyTimer("timer", label = "Countdown Timer", seconds = 10, type = "mm:ss"),
 #'       actionButton("update", "Update Timer")
 #'     ),
 #'     server = function(input, output, session) {
@@ -170,7 +171,7 @@ countDown <- function(inputId, session = shiny::getDefaultReactiveDomain()) {
 #'   library(shiny)
 #'   shinyApp(
 #'     ui = fluidPage(
-#'       shinyTimer("timer", label = "Count Up Timer", seconds = 0, type = "mm:ss.cs", background = "rectangle"),
+#'       shinyTimer("timer", label = "Count Up Timer", seconds = 0, type = "mm:ss.cs"),
 #'       actionButton("start", "Start Counting Up")
 #'     ),
 #'     server = function(input, output, session) {
