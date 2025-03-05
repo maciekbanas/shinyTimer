@@ -11,6 +11,25 @@ countUp(inputId, session = shiny::getDefaultReactiveDomain())
 
 \item{session}{The session object from the shiny server function.}
 }
+\value{
+No return value, called for side effects.
+}
 \description{
 Set shinyTimer in motion: count up
+}
+\examples{
+if (interactive()) {
+  library(shiny)
+  shinyApp(
+    ui = fluidPage(
+      shinyTimer("timer", label = "Count Up Timer", seconds = 0, type = "mm:ss.cs", background = "rectangle"),
+      actionButton("start", "Start Counting Up")
+    ),
+    server = function(input, output, session) {
+      observeEvent(input$start, {
+        countUp("timer")
+      })
+    }
+  )
+}
 }

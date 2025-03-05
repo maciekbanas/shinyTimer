@@ -38,3 +38,18 @@ A shiny UI component for the countdown timer.
 \description{
 shinyTimer widget
 }
+\examples{
+if (interactive()) {
+  library(shiny)
+  shinyApp(
+    ui = fluidPage(
+      shinyTimer("timer", label = "Countdown Timer", seconds = 10, type = "mm:ss", background = "circle")
+    ),
+    server = function(input, output, session) {
+      observeEvent(input$start, {
+        countDown("timer", session)
+      })
+    }
+  )
+}
+}

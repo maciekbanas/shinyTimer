@@ -23,6 +23,25 @@ resetTimer(
 
 \item{session}{The session object from the shiny server function.}
 }
+\value{
+No return value, called for side effects.
+}
 \description{
 Reset shinyTimer
+}
+\examples{
+if (interactive()) {
+  library(shiny)
+  shinyApp(
+    ui = fluidPage(
+      shinyTimer("timer", label = "Countdown Timer", seconds = 20, type = "mm:ss"),
+      actionButton("reset", "Reset Timer")
+    ),
+    server = function(input, output, session) {
+      observeEvent(input$reset, {
+        resetTimer("timer", seconds = 20)
+      })
+    }
+  )
+}
 }
