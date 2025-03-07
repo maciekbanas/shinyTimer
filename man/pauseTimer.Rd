@@ -4,13 +4,36 @@
 \alias{pauseTimer}
 \title{Pause shinyTimer}
 \usage{
-pauseTimer(session, inputId)
+pauseTimer(inputId, session = shiny::getDefaultReactiveDomain())
 }
 \arguments{
-\item{session}{The session object from the shiny server function.}
-
 \item{inputId}{The input ID corresponding to the UI element.}
+
+\item{session}{The session object from the shiny server function.}
+}
+\value{
+No return value, called for side effects.
 }
 \description{
 Pause shinyTimer
+}
+\examples{
+if (interactive()) {
+  library(shiny)
+  shinyApp(
+    ui = fluidPage(
+      shinyTimer("timer", label = "Countdown Timer", seconds = 20, type = "mm:ss"),
+      actionButton("start", "Start Countdown"),
+      actionButton("pause", "Pause Countdown")
+    ),
+    server = function(input, output, session) {
+      observeEvent(input$start, {
+        countDown("timer")
+      })
+      observeEvent(input$pause, {
+        pauseTimer("timer")
+      })
+    }
+  )
+}
 }

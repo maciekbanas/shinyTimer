@@ -4,11 +4,15 @@
 \alias{resetTimer}
 \title{Reset shinyTimer}
 \usage{
-resetTimer(session, inputId, hours = 0, minutes = 0, seconds = 0)
+resetTimer(
+  inputId,
+  hours = 0,
+  minutes = 0,
+  seconds = 0,
+  session = shiny::getDefaultReactiveDomain()
+)
 }
 \arguments{
-\item{session}{The session object from the shiny server function.}
-
 \item{inputId}{The input ID corresponding to the UI element.}
 
 \item{hours}{The new reset time in hours.}
@@ -16,7 +20,28 @@ resetTimer(session, inputId, hours = 0, minutes = 0, seconds = 0)
 \item{minutes}{The new reset time in minutes.}
 
 \item{seconds}{The new reset time in seconds.}
+
+\item{session}{The session object from the shiny server function.}
+}
+\value{
+No return value, called for side effects.
 }
 \description{
 Reset shinyTimer
+}
+\examples{
+if (interactive()) {
+  library(shiny)
+  shinyApp(
+    ui = fluidPage(
+      shinyTimer("timer", label = "Countdown Timer", seconds = 20, type = "mm:ss"),
+      actionButton("reset", "Reset Timer")
+    ),
+    server = function(input, output, session) {
+      observeEvent(input$reset, {
+        resetTimer("timer", seconds = 20)
+      })
+    }
+  )
+}
 }

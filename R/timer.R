@@ -10,6 +10,20 @@
 #' @param ... Any additional parameters you want to pass to the placeholder for the timer (`htmltools::tags$div`).
 #'
 #' @return A shiny UI component for the countdown timer.
+#' @examples
+#' if (interactive()) {
+#'   library(shiny)
+#'   shinyApp(
+#'     ui = fluidPage(
+#'       shinyTimer("timer", label = "Countdown Timer", seconds = 10)
+#'     ),
+#'     server = function(input, output, session) {
+#'       observeEvent(input$start, {
+#'         countDown("timer", session)
+#'       })
+#'     }
+#'   )
+#' }
 #' @export
 shinyTimer <- function(inputId, label = NULL, hours = 0, minutes = 0, seconds = 0, type = "simple", background = "none", ...) {
   shiny::addResourcePath("shinyTimer", system.file("www", package = "shinyTimer"))
@@ -50,7 +64,7 @@ shinyTimer <- function(inputId, label = NULL, hours = 0, minutes = 0, seconds = 
       ...
     ),
     htmltools::tags$script(src = "shinyTimer/timer.js"),
-    htmltools::tags$style(HTML("
+    htmltools::tags$style(shiny::HTML("
       .shiny-timer-circle {
         border: 3px solid #ccc;
         border-radius: 50%;
@@ -74,17 +88,36 @@ shinyTimer <- function(inputId, label = NULL, hours = 0, minutes = 0, seconds = 
 
 #' Update shinyTimer widget
 #'
-#' @param session The session object from the shiny server function.
 #' @param inputId The input ID corresponding to the UI element.
 #' @param hours The new starting time in hours for the countdown.
 #' @param minutes The new starting time in minutes for the countdown.
 #' @param seconds The new starting time in seconds for the countdown.
-#' @param type The new type of the countdown timer display ("simple", "mm:ss", "hh:mm:ss", "mm:ss.cs").
+#' @param type The new type of the countdown timer display ("simple", "mm:ss",
+#'   "hh:mm:ss", "mm:ss.cs").
 #' @param label The new label to be displayed above the countdown timer.
 #' @param background The new shape of the timer's container ("none", "circle", "rectangle").
+#' @param session The session object from the shiny server function.
 #'
+#' @return No return value, called for side effects.
+#' @examples
+#' if (interactive()) {
+#'   library(shiny)
+#'   shinyApp(
+#'     ui = fluidPage(
+#'       shinyTimer("timer", label = "Countdown Timer", seconds = 10, type = "mm:ss"),
+#'       actionButton("update", "Update Timer")
+#'     ),
+#'     server = function(input, output, session) {
+#'       observeEvent(input$update, {
+#'         updateShinyTimer("timer", seconds = 20, type = "hh:mm:ss")
+#'       })
+#'     }
+#'   )
+#' }
 #' @export
-updateShinyTimer <- function(session, inputId, hours = NULL, minutes = NULL, seconds = NULL, type = NULL, label = NULL, background = NULL) {
+updateShinyTimer <- function(inputId, hours = NULL, minutes = NULL, seconds = NULL, 
+                             type = NULL, label = NULL, background = NULL, 
+                             session = shiny::getDefaultReactiveDomain()) {
   message <- list(inputId = inputId)
   
   if (!is.null(hours) || !is.null(minutes) || !is.null(seconds)) {
@@ -104,44 +137,109 @@ updateShinyTimer <- function(session, inputId, hours = NULL, minutes = NULL, sec
 
 #' Set shinyTimer in motion: count down
 #'
-#' @param session The session object from the shiny server function.
 #' @param inputId The input ID corresponding to the UI element.
+#' @param session The session object from the shiny server function.
 #'
+#' @return No return value, called for side effects.
+#' @examples
+#' if (interactive()) {
+#'   library(shiny)
+#'   shinyApp(
+#'     ui = fluidPage(
+#'       shinyTimer("timer", label = "Countdown Timer", seconds = 20, type = "mm:ss"),
+#'       actionButton("start", "Start Countdown")
+#'     ),
+#'     server = function(input, output, session) {
+#'       observeEvent(input$start, {
+#'         countDown("timer")
+#'       })
+#'     }
+#'   )
+#' }
 #' @export
-countDown <- function(session, inputId) {
+countDown <- function(inputId, session = shiny::getDefaultReactiveDomain()) {
   session$sendCustomMessage('countDown', list(inputId = inputId))
 }
 
 #' Set shinyTimer in motion: count up
 #'
-#' @param session The session object from the shiny server function.
-#' @param inputId The input ID corresponding to the UI element.
+#' @inheritParams countDown
 #'
+#' @return No return value, called for side effects.
+#' @examples
+#' if (interactive()) {
+#'   library(shiny)
+#'   shinyApp(
+#'     ui = fluidPage(
+#'       shinyTimer("timer", label = "Count Up Timer", seconds = 0, type = "mm:ss.cs"),
+#'       actionButton("start", "Start Counting Up")
+#'     ),
+#'     server = function(input, output, session) {
+#'       observeEvent(input$start, {
+#'         countUp("timer")
+#'       })
+#'     }
+#'   )
+#' }
 #' @export
-countUp <- function(session, inputId) {
+countUp <- function(inputId, session = shiny::getDefaultReactiveDomain()) {
   session$sendCustomMessage('countUp', list(inputId = inputId))
 }
 
 #' Pause shinyTimer
 #'
-#' @param session The session object from the shiny server function.
-#' @param inputId The input ID corresponding to the UI element.
+#' @inheritParams countDown
 #'
+#' @return No return value, called for side effects.
+#' @examples
+#' if (interactive()) {
+#'   library(shiny)
+#'   shinyApp(
+#'     ui = fluidPage(
+#'       shinyTimer("timer", label = "Countdown Timer", seconds = 20, type = "mm:ss"),
+#'       actionButton("start", "Start Countdown"),
+#'       actionButton("pause", "Pause Countdown")
+#'     ),
+#'     server = function(input, output, session) {
+#'       observeEvent(input$start, {
+#'         countDown("timer")
+#'       })
+#'       observeEvent(input$pause, {
+#'         pauseTimer("timer")
+#'       })
+#'     }
+#'   )
+#' }
 #' @export
-pauseTimer <- function(session, inputId) {
+pauseTimer <- function(inputId, session = shiny::getDefaultReactiveDomain()) {
   session$sendCustomMessage('pauseTimer', list(inputId = inputId))
 }
 
 #' Reset shinyTimer
 #'
-#' @param session The session object from the shiny server function.
-#' @param inputId The input ID corresponding to the UI element.
+#' @inheritParams countDown
 #' @param hours The new reset time in hours.
 #' @param minutes The new reset time in minutes.
 #' @param seconds The new reset time in seconds.
 #'
+#' @return No return value, called for side effects.
+#' @examples
+#' if (interactive()) {
+#'   library(shiny)
+#'   shinyApp(
+#'     ui = fluidPage(
+#'       shinyTimer("timer", label = "Countdown Timer", seconds = 20, type = "mm:ss"),
+#'       actionButton("reset", "Reset Timer")
+#'     ),
+#'     server = function(input, output, session) {
+#'       observeEvent(input$reset, {
+#'         resetTimer("timer", seconds = 20)
+#'       })
+#'     }
+#'   )
+#' }
 #' @export
-resetTimer <- function(session, inputId, hours = 0, minutes = 0, seconds = 0) {
+resetTimer <- function(inputId, hours = 0, minutes = 0, seconds = 0, session = shiny::getDefaultReactiveDomain()) {
   total_seconds <- (hours * 3600) + (minutes * 60) + seconds
   session$sendCustomMessage('resetTimer', list(inputId = inputId, start = total_seconds))
 }
