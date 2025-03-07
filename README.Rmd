@@ -27,6 +27,12 @@ knitr::opts_chunk$set(
 
 ## Install
 
+CRAN version:
+
+```
+install.packages("shinyTimer")
+```
+
 Development version:
 
 ```

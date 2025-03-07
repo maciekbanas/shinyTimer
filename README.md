@@ -23,6 +23,10 @@ In examples below I make use of
 
 ## Install
 
+CRAN version:
+
+    install.packages("shinyTimer")
+
 Development version:
 
     # install.packages("remotes")
