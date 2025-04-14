@@ -22,27 +22,28 @@ test_that("shinyTimer function works correctly", {
   expect_true(inherits(ui, "shiny.tag.list"))
   
   # Test with specific parameters
-  ui <- shinyTimer("timer2", label = "Timer", hours = 1, minutes = 30, seconds = 45, type = "hh:mm:ss", background = "circle")
+  ui <- shinyTimer("timer2", label = "Timer", hours = 1, minutes = 30, seconds = 45, 
+                   type = "hh:mm:ss", frame = "circle")
   expect_true(inherits(ui, "shiny.tag.list"))
   
   # Test invalid type
   expect_error(shinyTimer("timer3", type = "invalid"), "Invalid type")
   
-  # Test invalid background
-  expect_error(shinyTimer("timer4", background = "invalid"), "Invalid background")
+  # Test invalid frame
+  expect_error(shinyTimer("timer4", frame = "invalid"), "Invalid frame")
 })
 
 test_that("updateShinyTimer function works correctly", {
   session <- MockShinySession$new()
   updateShinyTimer("timer1", hours = 1, minutes = 30, seconds = 45, type = "hh:mm:ss", label = "Updated Timer", 
-                   background = "rectangle", session = session)
+                   frame = "rectangle", session = session)
   message <- session$getLastCustomMessage("updateShinyTimer")
   expect_true(!is.null(message))
   expect_equal(message$inputId, "timer1")
   expect_equal(message$start, 5445) # 1 hour, 30 minutes, 45 seconds in total seconds
   expect_equal(message$type, "hh:mm:ss")
   expect_equal(message$label, "Updated Timer")
-  expect_equal(message$background, "rectangle")
+  expect_equal(message$frame, "rectangle")
 })
 
 test_that("countDown function works correctly", {
