@@ -11,7 +11,7 @@ updateShinyTimer(
   seconds = NULL,
   type = NULL,
   label = NULL,
-  background = NULL,
+  frame = NULL,
   session = shiny::getDefaultReactiveDomain()
 )
 }
@@ -29,7 +29,7 @@ updateShinyTimer(
 
 \item{label}{The new label to be displayed above the countdown timer.}
 
-\item{background}{The new shape of the timer's container ("none", "circle", "rectangle").}
+\item{frame}{The new shape of the timer's container ("none", "circle", "rectangle").}
 
 \item{session}{The session object from the shiny server function.}
 }

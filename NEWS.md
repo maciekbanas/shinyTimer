@@ -1,3 +1,7 @@
+# shinyTimer (development version)
+
+* Renamed `background` parameter to `frame` to better reflect its purpose. Added `fill` parameter to pass colors to the background of the `shinyTimer` ([#60](https://github.com/maciekbanas/shinyTimer/issues/60)).
+
 # shinyTimer 0.1.0
 
 This is the first release presenting the timer widget for `Shiny` applications with the following features:

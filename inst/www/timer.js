@@ -77,7 +77,7 @@ Shiny.addCustomMessageHandler('resetTimer', function(message) {
 });
 
 Shiny.addCustomMessageHandler('updateShinyTimer', function(message) {
-  const { inputId, start, type, label, background } = message;
+  const { inputId, start, type, label, frame } = message;
   const countdownElement = document.getElementById(inputId);
   const labelElement = document.querySelector(`label[for=${inputId}]`);
 
@@ -101,10 +101,10 @@ Shiny.addCustomMessageHandler('updateShinyTimer', function(message) {
 
   countdownElement.textContent = formatTime(pausedTime, countdownElement.getAttribute('data-type'));
 
-  if (background !== undefined) {
-    const backgroundClass = background === 'circle' ? 'shiny-timer-circle' :
-                            background === 'rectangle' ? 'shiny-timer-rectangle' : '';
-    countdownElement.className = `shiny-timer ${backgroundClass}`;
+  if (frame !== undefined) {
+    const frameClass = frame === 'circle' ? 'shiny-timer-circle' :
+                       frame === 'rectangle' ? 'shiny-timer-rectangle' : '';
+    countdownElement.className = `shiny-timer ${frameClass}`;
   }
 
   if (label !== undefined && labelElement) {
