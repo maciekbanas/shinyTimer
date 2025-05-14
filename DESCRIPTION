@@ -1,6 +1,6 @@
 Package: shinyTimer
 Title: Customizable Timer for 'shiny' Applications
-Version: 0.1.0.9000
+Version: 0.1.0.9001
 Authors@R: 
     person("Maciej", "Banas", email = "banasmaciek@gmail.com", role = c("aut", "cre"))
 Description: Provides a customizable timer widget for 'shiny' applications. Key 
