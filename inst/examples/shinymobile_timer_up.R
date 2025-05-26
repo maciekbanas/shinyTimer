@@ -39,7 +39,8 @@ ui <- shinyMobile::f7Page(
       ) |>
         htmltools::tagAppendAttributes(
           style="font-size:20px;"
-        )
+        ),
+      shiny::textOutput("shinytimer_content_output")
     )
     
   )
@@ -54,6 +55,9 @@ server <- function(input, output, session) {
   })
   shiny::observeEvent(input$resume_timer, {
     resetTimer("shiny_timer")
+  })
+  output$shinytimer_content_output <- shiny::renderText({
+    input$shinytimer_content
   })
 }
 

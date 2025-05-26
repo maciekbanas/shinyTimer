@@ -63,7 +63,10 @@ Shiny.addCustomMessageHandler('countUp', function(message) {
 });
 
 Shiny.addCustomMessageHandler('pauseTimer', function(message) {
+  const { inputId, start } = message;
   clearInterval(timerInterval);
+  const timerElement = document.getElementById(inputId);
+  Shiny.setInputValue("shinytimer_content", timerElement.textContent)
 });
 
 Shiny.addCustomMessageHandler('resetTimer', function(message) {
