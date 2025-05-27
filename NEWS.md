@@ -1,6 +1,7 @@
 # shinyTimer (development version)
 
-* Renamed `background` parameter to `frame` to better reflect its purpose. Added `fill` parameter to pass colors to the background of the `shinyTimer` ([#60](https://github.com/maciekbanas/shinyTimer/issues/60)).
+* Added new feedback value (text content of the timer) returned after pausing `shinyTimer` (#63). It can be accessed via `input$shinytimer_content`.
+* Renamed `background` parameter to `frame` to better reflect its purpose. Added `fill` parameter to pass colors to the background of the `shinyTimer` (#60).
 
 # shinyTimer 0.1.0
 
