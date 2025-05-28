@@ -80,37 +80,34 @@ Shiny.addCustomMessageHandler('resetTimer', function(message) {
 });
 
 Shiny.addCustomMessageHandler('updateShinyTimer', function(message) {
-  const { inputId, start, type, label, frame } = message;
-  const countdownElement = document.getElementById(inputId);
-  const labelElement = document.querySelector(`label[for=${inputId}]`);
-
-  if (!countdownElement) {
-    console.error(`Element with ID ${inputId} not found.`);
-    return;
-  }
-
+  const { inputId, start, type, label, frame, color } = message;
+  const el = document.getElementById(inputId);
+  const lbl = document.querySelector(`label[for=${inputId}]`);
+  if (!el) return;
   clearInterval(timerInterval);
-
   if (start !== undefined) {
-    countdownElement.setAttribute('data-start-time', start);
+    el.setAttribute('data-start-time', start);
     pausedTime = start;
   } else {
-    pausedTime = parseFloat(countdownElement.getAttribute('data-start-time'));
+    pausedTime = parseFloat(el.getAttribute('data-start-time'));
   }
-
   if (type !== undefined) {
-    countdownElement.setAttribute('data-type', type);
+    el.setAttribute('data-type', type);
   }
-
-  countdownElement.textContent = formatTime(pausedTime, countdownElement.getAttribute('data-type'));
-
+  el.textContent = formatTime(pausedTime, el.getAttribute('data-type'));
   if (frame !== undefined) {
-    const frameClass = frame === 'circle' ? 'shiny-timer-circle' :
-                       frame === 'rectangle' ? 'shiny-timer-rectangle' : '';
-    countdownElement.className = `shiny-timer ${frameClass}`;
+    const cls = frame === 'circle'
+      ? 'shiny-timer-circle'
+      : frame === 'rectangle'
+      ? 'shiny-timer-rectangle'
+      : '';
+    el.className = `shiny-timer ${cls}`;
   }
-
-  if (label !== undefined && labelElement) {
-    labelElement.textContent = label;
+  if (label !== undefined && lbl) {
+    lbl.textContent = label;
+  }
+  if (color !== undefined) {
+    el.style.color = color;
+    el.style.borderColor = color;
   }
 });

@@ -1,5 +1,6 @@
 # shinyTimer (development version)
 
+* Added `color` parameter to `shinyTimer()` and `updateShinyTimer()` functions (#57).
 * Added new feedback value (text content of the timer) returned after pausing `shinyTimer` (#63). It can be accessed via `input$shinytimer_content`.
 * Renamed `background` parameter to `frame` to better reflect its purpose. Added `fill` parameter to pass colors to the background of the `shinyTimer` (#60).
 
