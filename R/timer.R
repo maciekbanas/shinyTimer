@@ -8,6 +8,7 @@
 #' @param type The type of the countdown timer display ("simple", "mm:ss", "hh:mm:ss", "mm:ss.cs").
 #' @param frame The shape of the timer's container ("none", "circle", "rectangle").
 #' @param color A CSS color string for text and border.
+#' @param fill A CSS color string for the background.
 #' @param ... Any additional parameters you want to pass to the placeholder for the timer (`htmltools::tags$div`).
 #'
 #' @return A shiny UI component for the countdown timer.
@@ -27,7 +28,8 @@
 #' }
 #' @export
 shinyTimer <- function(inputId, label = NULL, hours = 0, minutes = 0, seconds = 0,
-                       type = "simple", frame = "circle", color = "#000", ...) {
+                       type = "simple", frame = "circle", color = "#000", fill = "#111",
+                       ...) {
   shiny::addResourcePath("shinyTimer", system.file("www", package = "shinyTimer"))
   
   if (!type %in% c("simple", "mm:ss", "hh:mm:ss", "mm:ss.cs")) {
@@ -61,7 +63,8 @@ shinyTimer <- function(inputId, label = NULL, hours = 0, minutes = 0, seconds = 
     "none"      = ""
   )
   
-  style_str <- paste0("color:", color, ";border-color:", color, ";")
+  style_str <- paste0("color:", color, ";border-color:", color, 
+                      ";background:", fill, ";")
   
   shiny::tagList(
     if (!is.null(label)) htmltools::tags$label(label, `for` = inputId),

@@ -10,6 +10,7 @@ ui <- shinyMobile::f7Page(
         type = "simple", 
         frame = "circle",
         color = "green",
+        fill = "black",
         style = "font-weight: bold; font-size: 72px;"
       )
     )

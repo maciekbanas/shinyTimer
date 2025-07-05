@@ -13,6 +13,7 @@ shinyTimer(
   type = "simple",
   frame = "circle",
   color = "#000",
+  fill = "#111",
   ...
 )
 }
@@ -32,6 +33,8 @@ shinyTimer(
 \item{frame}{The shape of the timer's container ("none", "circle", "rectangle").}
 
 \item{color}{A CSS color string for text and border.}
+
+\item{fill}{A CSS color string for the background.}
 
 \item{...}{Any additional parameters you want to pass to the placeholder for the timer (\code{htmltools::tags$div}).}
 }
