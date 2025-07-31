@@ -6,6 +6,8 @@ ui <- shinyMobile::f7Page(
       inputId = "shiny_timer",
       seconds = 0L, 
       type = "mm:ss.cs", 
+      color = "white",
+      frame = "none",
       style = "font-weight: bold; font-size: 72px; text-align:center"
     ),
     shiny::br(),
@@ -57,7 +59,7 @@ server <- function(input, output, session) {
     resetTimer("shiny_timer")
   })
   output$shinytimer_content_output <- shiny::renderText({
-    input$shinytimer_content
+    input$shiny_timer_content
   })
 }
 
