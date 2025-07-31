@@ -36,7 +36,7 @@ function startTimer(inputId) {
         clearInterval(timerInterval);
         timerElement.textContent = formatTime(0, type);
         pausedTime = 0;
-        Shiny.setInputValue('timer_done', true);
+        Shiny.setInputValue(inputId + '_done', true);
       } else {
         time = Math.max(time - 0.01, 0);
         pausedTime = time;
@@ -66,7 +66,7 @@ Shiny.addCustomMessageHandler('pauseTimer', function(message) {
   const { inputId, start } = message;
   clearInterval(timerInterval);
   const timerElement = document.getElementById(inputId);
-  Shiny.setInputValue("shinytimer_content", timerElement.textContent)
+  Shiny.setInputValue(inputId + "_content", timerElement.textContent)
 });
 
 Shiny.addCustomMessageHandler('resetTimer', function(message) {

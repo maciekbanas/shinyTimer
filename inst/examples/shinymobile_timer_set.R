@@ -5,6 +5,8 @@ ui <- shinyMobile::f7Page(
     shinyTimer(
       inputId = "shiny_timer",
       type = "hh:mm:ss", 
+      frame = "none",
+      color = "white",
       style = "font-weight: bold; font-size: 72px; text-align:center"
     ),
     shinyMobile::f7Slider(
