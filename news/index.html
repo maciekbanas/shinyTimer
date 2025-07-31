@@ -7,7 +7,7 @@
 
     <a class="navbar-brand me-2" href="../index.html">shinyTimer</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.1.0.9003</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.1.0.9004</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -34,8 +34,9 @@
     <div class="section level2">
 <h2 class="pkg-version" data-toc-text="development version" id="shinytimer-development-version">shinyTimer (development version)<a class="anchor" aria-label="anchor" href="#shinytimer-development-version"></a></h2>
 <ul><li>Added <code>color</code> parameter to <code><a href="../reference/shinyTimer.html">shinyTimer()</a></code> and <code><a href="../reference/updateShinyTimer.html">updateShinyTimer()</a></code> functions (#57).</li>
-<li>Added new feedback value (text content of the timer) returned after pausing <code>shinyTimer</code> (#63). It can be accessed via <code>input$shinytimer_content</code>.</li>
+<li>Added new feedback value (text content of the timer) returned after pausing <code>shinyTimer</code> (#63). It can be accessed via <code>input${inputId}_content</code>, where <code>inputId</code> is the id of the <code>shinyTimer</code> widget.</li>
 <li>Renamed <code>background</code> parameter to <code>frame</code> to better reflect its purpose. Added <code>fill</code> parameter to pass colors to the background of the <code>shinyTimer</code> (#60).</li>
+<li>Made callback value after finishing of count down more flexible by changing <code>input$timer_done</code> to <code>input${inputId}_done</code>, where <code>inputId</code> is the id of the <code>shinyTimer</code> widget (#67).</li>
 </ul></div>
     <div class="section level2">
 <h2 class="pkg-version" data-toc-text="0.1.0" id="shinytimer-010">shinyTimer 0.1.0<a class="anchor" aria-label="anchor" href="#shinytimer-010"></a></h2><p class="text-muted">CRAN release: 2025-03-07</p>
